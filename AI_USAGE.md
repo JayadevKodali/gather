@@ -6,10 +6,15 @@ prototype, and wrote the overnight handover. Jay reviewed and approved each deci
 
 **Building (Claude, in a cloud coding session with access to this repo):** wrote the code, fixtures,
 tests, evaluation harness and docs (`claude/gather-v1`, then the design refresh and Stage 2 on
-`claude/gather-stage2`), including the switch of the brief reader to OpenAI and the hosted deployment. It ran the
+`claude/gather-stage2`; all now on `main`), including the switch of the brief reader to OpenAI and the hosted deployment. It ran the
 type checker, linter, unit and database tests, the production build and a scripted browser
 walkthrough before each push. The commit messages and `HANDOFF.md` record what was verified and
 what wasn't.
+
+**Design pass (15 Nov):** Claude rebuilt the pages from Jay's page-by-page review notes. A separate chat, acting as
+an independent tester, tested the result and its findings were fixed in two rounds. The trailer's screen
+recordings were captured by Claude and edited by ChatGPT. Claude also exported the public copy of this repository
+and checked it for secrets and private notes.
 
 **Inside the product:** one OpenAI call per brief (`gpt-6-luna`, Responses API with a strict
 Structured Outputs schema, `store: false`) turns free text into structured fields, which Gather

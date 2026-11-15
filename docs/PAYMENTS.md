@@ -3,6 +3,7 @@
 ## Now (assessment build, Stripe test mode)
 - **Quote:** the venue sets the deposit, the balance due date (days before the event) and a cancellation cutoff. The quote shows the total, the deposit, the remaining balance with its due date, and the cancellation terms. The terms are saved on the quote and copied onto the booking, so a later change of policy never alters an existing booking.
 - **Deposit:** Stripe Checkout. The signed webhook confirms the booking and blocks the date. If the deposit equals the total, the booking is paid in full straight away.
+- **What the payment page shows:** the Stripe Checkout product carries a description (quote reference, date, guests) and the venue's cover photo. Stripe fetches the photo itself, so it is sent only when the site is on a public https address. The amount, currency, metadata and expiry are unchanged. The demo payment page shows the same summary.
 - **Balance:** My bookings → **Pay remaining balance** opens a second Checkout for the same booking. The amount is calculated on the server (quote total minus confirmed payments). The booking shows **Paid in full**, and both parties are emailed, only after Stripe confirms. A declined balance leaves the booking confirmed and the planner can retry; the open session is reused.
 - **Cancellation:** either party can cancel from the booking. A preview shows the exact refund and what the venue keeps before they confirm; the confirmation is checked against the same numbers, so a crossed cutoff can't slip through.
   - The venue cancels: every payment is refunded.

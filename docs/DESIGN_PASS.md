@@ -1,6 +1,7 @@
 # Design pass (15–16 Nov 2026)
 
 Branch `claude/gather-design-pass`, started from `a51671f` (`claude/gather-photos`: b2df2f3 + the new venue photos).
+Merged to `main` and promoted to production at `206bb3c` on 15 Nov 2026, about 21:55 GMT.
 Brief: Jay's DESIGN_PASS_PROMPT.md. Screenshots: `docs/screenshots/design-pass/<before|after-phaseN>/`, made by
 `python3 e2e/screens.py <url> <folder>` on a fresh demo database (1440 × 900).
 
@@ -95,3 +96,18 @@ For the record: `src/app/api/listings/[id]/photos/route.ts` was edited in Phase 
 
 Checks: 183 tests, typecheck, lint (0 errors, 1 old warning), build, walkthrough, money, auth pass; eval identical to the report at fdd4988.
 Screenshots: `docs/screenshots/design-pass/after-fixes/` (53 review pages plus FIX-01/02/08 extras).
+
+## Three small fixes after the final test (done)
+| Fix | Commit | What changed |
+|---|---|---|
+| A | fd5733f | After "Decline quote", keyboard focus lands in the confirmation box's reason field. Focus goes to the field, not a button, so Enter can't decline by accident. The walkthrough script checks it. |
+| B | 48ba3b9 | The Cover pill sits in the first photo tile's "Make cover" slot, so all photo tiles are the same height and their arrows line up. |
+| C | 206bb3c | A paid-in-full booking shows a green dot beside "Remaining balance £0". It was amber. |
+
+Checks: 183 tests, typecheck, lint (0 errors, 1 old warning), build, walkthrough, money, auth pass; eval identical to 80655e0.
+No migrations, no new dependencies.
+
+## After the fixes
+- Every check in this document ran locally in demo mode. The build was promoted afterwards; the hosted checks made
+  since then, and the ones still to do, are listed at the top of `HANDOFF.md`.
+- A separate phone and tablet pass was started but is unfinished and is not in this build.

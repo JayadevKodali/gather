@@ -1,13 +1,65 @@
+# Design pass hand-back (15 Nov 2026)
+
+**Code final at `206bb3c`.** On 15 November at about 21:55 GMT, `main` and the production branch
+(`claude/gather-stage2`) were both moved to it, and https://www.gatherldn.com serves it. The rollback point for
+production is `b2df2f3`. Commits after `206bb3c` change documents only. Commit hashes and branch names in these
+documents come from the private working repository, which holds the full history; the public copy has `main` only.
+
+**What changed.** Every page was redesigned on one design system, and a few behaviours changed on purpose. The
+record, item by item with commits, is `docs/DESIGN_PASS.md`. Before and after screenshots of every page are in
+`docs/screenshots/design-pass/`.
+
+**Checks on `206bb3c`** (run locally in demo mode, then repeated from a clean copy of the repository):
+
+- `npm ci` installs cleanly
+- 183 tests pass, in 19 files
+- typecheck is clean, lint has 0 errors (1 old warning) and the production build passes
+- `e2e/walkthrough.py`, `e2e/money.py` and `e2e/auth.py` pass, each on a fresh database
+- the offline evaluation is identical to the committed report
+- no database migrations and no new dependencies were added
+- a separate tester passed the build after two rounds of fixes
+
+**Deliberate behaviour changes:**
+
+- Declining a quote asks for confirmation first. The optional reason is sent in the form, never in the page address.
+- Add a listing is five steps. Each step counts as done from what is saved, so nothing new is stored.
+- Saving the facilities form stores every answer, including "Not confirmed".
+- Photos can be reordered by dragging or with arrow buttons. The first photo is the cover.
+- Stripe Checkout shows the venue photo and a description (quote reference, date, guests). The amount, currency,
+  metadata and expiry are unchanged.
+- The admin dashboard counts only confirmed bookings and shows cancelled ones separately.
+- The venue sees venue-side wording ("Quote sent", cancellation terms from its point of view). Display only.
+
+**Checked on the live site after promotion** (15 Nov, read-only, no records created):
+
+- Signed out: the home, sign-in, sign-up, forgot-password and privacy pages load, and the planner, owner and admin
+  areas send the visitor to sign-in.
+- Signed in as a venue owner: Manage listings, a listing's edit page, the calendar, the inbox, an enquiry and a
+  booking load with the new design.
+
+**Not yet done:**
+
+- The full hosted journey on this build: a brief read by OpenAI, a Stripe test deposit and booking confirmation,
+  emails, admin sign-in and photo upload. The Stage 2 table below records that journey on the earlier build.
+- A separate phone and tablet pass was started but is unfinished and is not in this build.
+- Tidying the test data left on the live database (Jay's decision).
+- The real-launch tasks in `docs/LAUNCH_TASKS.md`.
+
 # Polish pass (15 Nov 2026): see docs/POLISH_REPORT.md
 
 Branch `claude/gather-polish` (6 commits on `51504f1`), not merged and not promoted. The report has what changed,
 the checks, the per-role Pass/Fail/Blocked checklist, before/after screenshots and the actions still due.
 Jay needs to set: `CRON_SECRET`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (plus a private `venue-photos` bucket).
 
+*Note, 15 Nov later that day: the three settings were added and the polish pass was promoted to production
+(see the report). It is now part of `main`.*
+
 # Stage 2 hand-back (Claude → Jay), 15 Nov 2026
 
 **Branch:** `claude/gather-stage2` (based on `claude/gather-design-refresh`). **Live:** https://www.gatherldn.com
 (Vercel production branch = this branch). Not merged; the merge decision is Jay's.
+*Note, 15 Nov, 21:55 GMT: merged. `main` and this branch are both at `206bb3c`. The table below is the hosted test
+of the earlier Stage 2 build, kept as the record of that test.*
 Every row below says where it was tested: **Hosted** = the live site, run in the desktop app's browser pane on
 15 Nov, 02:54–03:22 GMT. Jay did the sign-ins and Stripe test cards; Claude did everything else.
 
@@ -62,7 +114,8 @@ From the hosted test: owner *Olu Test (owner)* with *Olu Test Loft* (booked 15 A
 
 # History
 
-Kept as written at the time, for the record. Some items below say "not built" or "not verified" that were
+Kept as written at the time, for the record. The branch names below are from the private working repo; everything
+is now on `main`. Some items below say "not built" or "not verified" that were
 built and checked later (email verification, password reset, photo upload, hosted payments). The current
 state is in the sections above and in master brief §16.
 

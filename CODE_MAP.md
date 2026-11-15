@@ -44,7 +44,8 @@ app/plan/[id]/page.tsx  form ─▶ app/actions/planner.ts saveDetailsAction
 payDepositAction ─▶ startCheckout()    lib/services/checkout.ts
    in one transaction: current quote? within strict cap? date open and unbooked?
    → insert pending checkout (the HOLD; unique index = one hold per listing-day)
-   → provider.createSession()  demo page or Stripe Checkout
+   → checkoutSummary()         lib/services/checkout-summary.ts   venue photo + "date · guests" for the payment page
+   → provider.createSession()  demo page, or Stripe Checkout built by stripeSessionParams() in lib/adapters/payments.ts
 paid ─▶ fulfilCheckout()  (demo page action, or Stripe webhook)
    in one transaction: amount + GBP + quote still current → insert booking (unique listing+date)
    → checkout paid, quote paid, enquiry booked → emails to both sides
@@ -67,11 +68,41 @@ Each is small. Find the file, make the change, run `npm test`.
 6. **Stop admins seeing something.** Every admin query is in `lib/services/admin.ts`. Delete a field
    there and the page stops showing it.
 7. **Add a role check.** Use `requireRole(actor, "owner")` (services) or `requirePageRole("owner")` (pages).
+8. **Change the wording of a set-up step, or what counts as "done".** `lib/listing-setup.ts` (`SETUP_STEPS`,
+   `setupProgress`), tested in `tests/listing-setup.test.ts`.
+9. **Change what the Stripe payment page says.** `stripeSessionParams` in `lib/adapters/payments.ts`. The test
+   `tests/stripe-session.test.ts` pins the amount and metadata.
+10. **Change a status pill's colour or wording.** `components/StatusPill.tsx` for tones; `enquiryStatusLabel` in
+    `lib/services/enquiries.ts` for wording.
+
+## Design pass: where the new pieces live
+
+| What | File |
+|---|---|
+| The one status pill (tones and icons) | `components/StatusPill.tsx` |
+| Shared page header | `components/PageHeader.tsx` |
+| Two-part layout for account pages and the 404 page | `components/AuthShell.tsx` |
+| Brief box with example chips and the reading outline | `components/BriefBox.tsx` |
+| The sticky "Your event" summary strip | `components/BriefStrip.tsx`, text from `lib/brief-summary.ts` |
+| Booking panel: tracker, next action, payment timeline | `components/BookingPanel.tsx` |
+| Live totals on the owner's quote form (display only) | `components/QuoteTotals.tsx` |
+| The five set-up steps and what counts as done | `lib/listing-setup.ts`, step bar in `components/SetupSteps.tsx`, pages `app/owner/listings/new/page.tsx` and `app/owner/listings/[id]/page.tsx` |
+| Photo tiles, arrows and drag to reorder | `components/PhotoManager.tsx`, `components/SortablePhotos.tsx`; server rule `reorderPhotos` in `lib/services/photos.ts` |
+| Decline confirmation | `declineQuoteAction` in `app/actions/enquiry.ts`; the box in `app/enquiries/[id]/page.tsx` |
+| What the payment page shows | `lib/services/checkout-summary.ts`; `stripeSessionParams` in `lib/adapters/payments.ts` |
+| Venue-side wording | `enquiryStatusLabel` and `termsForViewer` in `lib/services/enquiries.ts` |
+| Admin counts (confirmed bookings only) | `lib/services/admin.ts` |
+| Design scales (spacing, type, corners, shadows, motion) | top of `app/globals.css` |
+| Screenshot script for every page | `e2e/screens.py` (repo root) |
+
+Tests added in the design pass, in `tests/` at the repo root: `viewer-wording.test.ts`, `decline-confirm.test.ts`,
+`stripe-session.test.ts`, `listing-setup.test.ts`, `photo-arrows.test.ts`, `create-listing-next.test.ts`.
+Extended: `booking-money.test.ts`, `photos.test.ts`. The change log is `docs/DESIGN_PASS.md`.
 
 ## Other places you might be asked about
 
-- **Homepage and motion:** `app/page.tsx` (sections), `components/Motion.tsx` (reads scroll and pointer, sets CSS variables), `components/Cutaway.tsx` (layered-depth 3D moment), styles under "Homepage" in `app/globals.css`. See `docs/DESIGN_REFRESH.md`.
-- **Venue photos:** `lib/venue-images.ts` (slug → photo and alt), `components/VenueImage.tsx` (photo or drawn fallback via `components/VenueArt.tsx`).
+- **Homepage and motion:** `app/page.tsx` (sections), `components/Motion.tsx` (reads scroll and pointer, sets CSS variables), `components/Cutaway.tsx` (the "Every room is checked" image: a flat image that settles in as it enters view; the image is `CHECKED_IMAGE` in `lib/venue-images.ts`), styles under "Homepage" in `app/globals.css`. See `docs/DESIGN_REFRESH.md`.
+- **Venue photos:** `lib/venue-images.ts` (slug → photo and alt), `components/VenueImage.tsx` (photo or drawn fallback via `components/VenueArt.tsx`). Owner uploads: `lib/services/photos.ts`.
 - **Card text** ("120 standing · £4,200 hire fee", "Why it fits"): `lib/matching/card.ts`, tested in `tests/cards-and-images.test.ts`.
 - **Design tokens:** top of `app/globals.css`.
 - **Demo vs connected switch:** `lib/config.ts`.

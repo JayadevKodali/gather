@@ -12,7 +12,8 @@ All venues, people and payments are synthetic.
 ## Live site
 
 **https://www.gatherldn.com**: connected mode on Vercel, with Supabase (London), OpenAI `gpt-6-luna`,
-Stripe **test mode** and Resend (`bookings@mail.gatherldn.com`).
+Stripe **test mode** and Resend (`bookings@mail.gatherldn.com`). It runs the code on this
+repository's `main` branch, final on 15 November 2026 (see [HANDOFF.md](HANDOFF.md)).
 
 | Role | Email | What's there |
 |---|---|---|
@@ -25,19 +26,31 @@ one-click account switching and no email outbox. Emails to these `@gather.test` 
 not sent, because those addresses can't receive mail. Sign up with your own inbox to receive notifications.
 
 **Reviewer walkthrough (about 10 minutes).**
-1. Sign in as Priya. Type *80 standing near Shoreditch in late March, under £6,000, must have AV*.
-   OpenAI reads it, and Gather asks for the exact date. Answer *26 March 2027* → **Search venues**.
-2. Five venues appear, each with a reason. Try both price sorts, open **The Loom Room** and
-   **Send enquiry**.
-3. Sign in as Sam → **Inbox** → the enquiry → add a line (for example, setup £150) → **Send quote**.
-   Back as Priya, ask a question about the quote. As Sam, change a line and **Send revised quote**:
-   the first quote stays on record as *Replaced*.
-4. **Paying:** to keep 26 March free for the next reviewer, don't pay for the Loom Room. As Priya, write
+1. Sign in as Priya. On **What are you planning?**, type *80 standing near Shoreditch in late March,
+   under £6,000, must have AV* and press **Read my brief**. OpenAI reads it, and Gather asks one question
+   for the exact date (its wording can vary slightly). Type *26 March 2027*, press **Answer**, then
+   **Search venues**.
+2. Up to five venues appear, each with **Why it fits**. Try the **Price** sort pills. On The Loom Room
+   press **View and enquire**, then **Send enquiry**.
+3. Sign in as Sam → **Inbox** → open the enquiry. The planner's brief stays on the right. Under **Send an
+   itemised quote**, add a line (for example *Setup*, 150), set the **Deposit (£)** and press **Send quote**.
+   The total, deposit and balance update as you type.
+4. As Priya, open the enquiry, press **Ask about this quote** and send a question. As Sam, change a line
+   and press **Send revised quote**: the first quote stays on record as *Replaced*.
+5. To see the decline confirmation without declining: as Priya, open **Decline this quote**, press
+   **Decline quote**, then **Keep**.
+6. **Paying:** to keep 26 March free for the next reviewer, don't pay for the Loom Room. As Priya, write
    *30 people seated in Finsbury Park on 20 September 2027* (any day from July to December 2027 works).
-   Only *Gather Test Room (payment testing)* appears. Enquire, quote it as Sam, then pay as Priya with
-   `4000 0000 0000 0002` (declined), then `4242 4242 4242 4242` (any future expiry, any CVC). The booking
-   is confirmed once Stripe's webhook arrives, and the date disappears from new searches.
-5. Sign in as Amara for the dashboard.
+   Only *Gather Test Room (payment testing)* appears. Enquire, quote it as Sam, then as Priya press
+   **Pay £… deposit**. Stripe's test checkout shows the venue photo, quote reference, date and guests.
+   Pay with `4000 0000 0000 0002` (declined), then `4242 4242 4242 4242` (any future expiry, any CVC).
+   The booking is confirmed once Stripe's webhook arrives, and the date disappears from new searches.
+   The booking page shows a progress tracker and a **Next** box with **Pay remaining balance**.
+7. Optional: pay the balance (the panel turns green and reads *Paid in full*), or press **Cancel booking**
+   to see what would be refunded before **Confirm cancellation**.
+8. As Sam, see **Dates and calendar** (the booked date) and **Bookings**. Under **Manage listings**,
+   **Add a listing** shows the five set-up steps.
+9. Sign in as Amara for the **Pilot dashboard**.
 
 ## Run it in under 10 minutes (demo mode, no accounts needed)
 
@@ -63,8 +76,8 @@ migrations and loads 32 synthetic venues, demo accounts and some sample activity
 | Planner | `maya@gather.test` (Maya) | Has a confirmed booking and a pending enquiry |
 
 **Two-minute walkthrough:** sign in as Priya → *Use the sample brief* → *Read my brief* → answer
-"26 March 2027" → *Search venues* → *View and enquire* on The Loom Room → *Send enquiry*.
-Switch to Sam → Inbox → open the enquiry → *Send quote*. Switch to Priya → *Pay deposit* → card
+"26 March 2027" → *Answer* → *Search venues* → *View and enquire* on The Loom Room → *Send enquiry*.
+Switch to Sam → Inbox → open the enquiry → *Send quote*. Switch to Priya → *Pay £… deposit* → card
 `4242 4242 4242 4242` (or `4000 0000 0000 0002` to see a decline). Switch to Amara for the dashboard.
 Demo emails are in **Email outbox** (top bar).
 
@@ -73,7 +86,7 @@ Demo emails are in **Email outbox** (top bar).
 | Command | What it does |
 |---|---|
 | `npm run dev` | Start the app (demo mode unless `GATHER_MODE=connected`) |
-| `npm test` | 157 Vitest tests: matcher hard rules, venue photo checks and ownership, admin contact scoping, the keep-alive guard, rules and OpenAI brief readers, follow-ups, pricing, roles, cross-account access, quotes, concurrent checkouts, duplicate payment events, Stripe expiry, balance payments, cancellations and refunds at the cutoff boundaries, sign-in security (password rules, cooldown, reset, email verification), the Supabase driver over the Postgres protocol |
+| `npm test` | 183 Vitest tests in 19 files: matcher hard rules, venue photo checks and ownership, admin contact scoping, the keep-alive guard, rules and OpenAI brief readers, follow-ups, pricing, roles, cross-account access, quotes, concurrent checkouts, duplicate payment events, Stripe expiry, balance payments, cancellations and refunds at the cutoff boundaries, sign-in security (password rules, cooldown, reset, email verification), the Supabase driver over the Postgres protocol, the decline confirmation, the Stripe session's money fields, the five listing set-up steps, photo reordering and its arrow buttons, venue-side wording, admin counts after a cancellation |
 | `npm run eval` | Matcher evaluation → `eval/results/latest.md` (see [eval/README.md](eval/README.md)) |
 | `npm run eval:live` | Same, plus the raw-text pass through OpenAI → `eval/results/openai-live.md`. Reads `OPENAI_API_KEY` from `.env.local`; costs about a penny |
 | `npm run eval:sheet -- <briefs.json>` | Labelling sheet for a set of briefs (eligible venues, no scores) |
@@ -81,6 +94,9 @@ Demo emails are in **Email outbox** (top bar).
 | `npm run db:migrate` | Apply `supabase/migrations` (connected mode) |
 | `npm run typecheck` / `npm run lint` / `npm run build` | Checks and production build |
 | `python3 e2e/walkthrough.py` | Browser walkthrough of the whole journey (needs Python Playwright + Chrome, and the app running on a fresh seed) |
+| `python3 e2e/money.py` | Browser run of balance payments, cancellations and refunds (same needs, fresh seed) |
+| `python3 e2e/auth.py` | Browser run of sign-up, email verification, password reset and sign-in security (same needs, fresh seed) |
+| `python3 e2e/screens.py <url> <folder>` | A screenshot of every page into `docs/screenshots/design-pass/<folder>/` (same needs, fresh seed) |
 
 ## Demo mode vs connected mode
 
@@ -143,5 +159,7 @@ none of the 32 main venues have dates. Brief: "30 people seated in Finsbury Park
 - [eval/README.md](eval/README.md): how matching is evaluated and labelled
 - [AI_USAGE.md](AI_USAGE.md): how AI tools were used
 - [HANDOFF.md](HANDOFF.md): build status, what's verified, what isn't, morning checklist
-- `docs/DESIGN_REFRESH.md`: the visual redesign, its motion effects and how they were verified
+- `docs/DESIGN_REFRESH.md`: the first visual redesign, its motion effects and how they were verified
+- `docs/DESIGN_PASS.md`: the page-by-page redesign that followed, and its fixes
+- `docs/screenshots/design-pass/`: before and after screenshots of every page
 - `docs/screenshots/`: screenshots from the browser walkthrough
