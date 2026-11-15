@@ -1,0 +1,32 @@
+{
+  "_note": "One extra synthetic listing used ONLY for testing deposits. It is open every day from July to December 2027, when none of the 32 main venues have dates, so paying for it never blocks a walkthrough date or changes the matching evaluation (which uses data/venues.json only).",
+  "venues": [
+    {
+      "slug": "v90-gather-test-room",
+      "owner": "owner@gather.test",
+      "name": "Gather Test Room (payment testing)",
+      "neighbourhood": "Finsbury Park",
+      "borough": "Haringey",
+      "venueType": "Test studio",
+      "suits": ["corporate", "birthday", "private", "other"],
+      "capacity": { "standing": 60, "seated": 40, "mixed": 50 },
+      "pricingModel": "hire_fee",
+      "pricePence": 50000,
+      "facilities": {
+        "toilets": { "state": "yes" },
+        "wifi": { "state": "yes" },
+        "tables": { "state": "yes" },
+        "chairs": { "state": "yes" },
+        "stepFree": { "state": "yes" },
+        "accessibleToilet": { "state": "yes" },
+        "av": { "state": "yes" },
+        "microphones": { "state": "yes", "charge": "priced", "pricePence": 2500 },
+        "catering": { "state": "no" }
+      },
+      "availability": { "from": "2027-07-01", "to": "2027-12-31", "closedWeekdays": [], "blocked": [] },
+      "description": "A fictional room that exists so reviewers can test the Stripe test-mode deposit on any date from July to December 2027 without using up a walkthrough date.",
+      "accessNotes": "Fictional. Level access throughout.",
+      "published": true
+    }
+  ]
+}

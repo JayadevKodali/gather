@@ -1,0 +1,21 @@
+{
+  "labeller": "Claude (development set only — not independent)",
+  "labelledAt": "2026-11-14T01:55:00Z",
+  "rubric": "eval/README.md: passes hard rules; in the requested borough or next door (any area if none given); within a strict cap, or at most 15% over a flexible guide; the right kind of place for the event; room at least ~25% full.",
+  "labels": {
+    "D01-amara-example": { "acceptable": ["v01-loom-room", "v03-glass-yard", "v10-signal-box", "v18-pinehurst-suite"], "notes": "Stratford Atrium excluded: 80 in a 350 room." },
+    "D02-missing-guests": { "acceptable": ["v10-signal-box", "v18-pinehurst-suite", "v23-southbank-terrace"] },
+    "D03-two-budgets": { "acceptable": ["v01-loom-room", "v02-copper-arch", "v05-fennel-finch", "v06-saltbox-gallery", "v08-brickwork-social", "v09-thimble-thread", "v10-signal-box", "v11-orchard-rooftop", "v15-lamplight-library", "v18-pinehurst-suite", "v21-hollow-oak", "v30-angel-canal-room", "v32-fitzrovia-glass-box"], "notes": "Screening room excluded for a client dinner." },
+    "D04-exact-capacity": { "acceptable": ["v14-cinder-screening", "v15-lamplight-library", "v18-pinehurst-suite", "v32-fitzrovia-glass-box"] },
+    "D05-no-availability": { "acceptable": [], "notes": "Expected empty shortlist." },
+    "D06-vague-area": { "acceptable": ["v08-brickwork-social", "v09-thimble-thread", "v11-orchard-rooftop", "v12-tin-chapel", "v21-hollow-oak", "v30-angel-canal-room"], "notes": "Anything more than 15% over the £3k guide excluded." },
+    "D07-per-head-cap": { "acceptable": ["v12-tin-chapel", "v24-brixton-vaults", "v25-deptford-printworks"] },
+    "D08-step-free": { "acceptable": ["v30-angel-canal-room"], "notes": "Pinehurst is 16% over the guide; screening room wrong for lunch." },
+    "D09-range-and-mixed": { "acceptable": ["v12-tin-chapel", "v24-brixton-vaults", "v25-deptford-printworks"] },
+    "D10-almost-empty": { "acceptable": ["v01-loom-room", "v02-copper-arch", "v03-glass-yard", "v04-alder-dining", "v05-fennel-finch", "v08-brickwork-social", "v09-thimble-thread", "v13-marlowe-club", "v16-mv-wren", "v19-wren-lane-loft", "v21-hollow-oak", "v27-drawing-room", "v30-angel-canal-room", "v31-cellar-aldgate", "v32-fitzrovia-glass-box"] },
+    "D11-not-london": { "acceptable": ["v01-loom-room", "v02-copper-arch", "v04-alder-dining", "v05-fennel-finch", "v19-wren-lane-loft", "v21-hollow-oak", "v30-angel-canal-room"] },
+    "D12-priced-extra-under-cap": { "acceptable": ["v11-orchard-rooftop", "v24-brixton-vaults", "v25-deptford-printworks"] },
+    "D13-tiny-dinner": { "acceptable": ["v04-alder-dining", "v05-fennel-finch", "v08-brickwork-social", "v19-wren-lane-loft", "v20-little-ember", "v31-cellar-aldgate"] },
+    "D14-town-hall": { "acceptable": ["v18-pinehurst-suite"] }
+  }
+}

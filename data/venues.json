@@ -1,0 +1,2520 @@
+{
+ "_note": "Synthetic fixtures for the Gather work test. Every venue, owner and address is fictional.",
+ "venues": [
+  {
+   "slug": "v01-loom-room",
+   "owner": "owner@gather.test",
+   "name": "The Loom Room",
+   "neighbourhood": "Shoreditch",
+   "borough": "Hackney",
+   "venueType": "Warehouse studio",
+   "suits": [
+    "corporate",
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 120,
+    "seated": 70,
+    "mixed": 90
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 420000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "videoConferencing": {
+     "state": "no"
+    },
+    "microphones": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 8000
+    },
+    "avTechnician": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 18000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2026-12-24",
+     "2026-12-25",
+     "2027-03-20",
+     "2027-04-17"
+    ]
+   },
+   "description": "A double-height former textile floor with exposed brick, timber beams and big Crittall windows.",
+   "accessNotes": "Level entrance and event room. Accessible shared toilet on the same floor.",
+   "published": true
+  },
+  {
+   "slug": "v02-copper-arch",
+   "owner": "owner@gather.test",
+   "name": "Copper Arch Studio",
+   "neighbourhood": "Hackney Wick",
+   "borough": "Hackney",
+   "venueType": "Event studio",
+   "suits": [
+    "corporate",
+    "birthday",
+    "private",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 100,
+    "seated": 60,
+    "mixed": 80
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 510000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "no"
+    },
+    "storage": {
+     "state": "no"
+    },
+    "microphones": {
+     "state": "no"
+    },
+    "avTechnician": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     1
+    ],
+    "blocked": [
+     "2027-03-26",
+     "2027-04-17"
+    ]
+   },
+   "description": "A canal-side studio with a copper-clad bar and a big roller door onto the towpath.",
+   "accessNotes": "Entrance route and accessible toilet not yet confirmed by the owner.",
+   "published": true
+  },
+  {
+   "slug": "v03-glass-yard",
+   "owner": "owner2@gather.test",
+   "name": "The Glass Yard",
+   "neighbourhood": "Bethnal Green",
+   "borough": "Tower Hamlets",
+   "venueType": "Courtyard venue",
+   "suits": [
+    "birthday",
+    "private",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 95,
+    "seated": 65,
+    "mixed": 75
+   },
+   "pricingModel": "per_head",
+   "pricePence": 6500,
+   "facilities": {
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "babyChanging": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "loading": {
+     "state": "no"
+    },
+    "staging": {
+     "state": "no"
+    },
+    "storage": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    },
+    "setup": {
+     "state": "yes",
+     "charge": "to_confirm"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-04-17"
+    ]
+   },
+   "description": "A glazed courtyard under a lattice of festoon lights, with a small bar in the old coach house.",
+   "accessNotes": "Two steps at the event entrance.",
+   "published": true
+  },
+  {
+   "slug": "v04-alder-dining",
+   "owner": "owner2@gather.test",
+   "name": "Alder Private Dining",
+   "neighbourhood": "Shoreditch",
+   "borough": "Hackney",
+   "venueType": "Private dining room",
+   "suits": [
+    "birthday",
+    "private",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 45,
+    "seated": 32,
+    "mixed": null
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 180000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    },
+    "microphones": {
+     "state": "no"
+    },
+    "soundSystem": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "staging": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "coatCheck": {
+     "state": "no"
+    },
+    "storage": {
+     "state": "no"
+    },
+    "videoConferencing": {
+     "state": "no"
+    },
+    "avTechnician": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     1
+    ],
+    "blocked": []
+   },
+   "description": "A candlelit room above an open kitchen, with one long oak table.",
+   "accessNotes": "Level route from the entrance to the dining room.",
+   "published": true
+  },
+  {
+   "slug": "v05-fennel-finch",
+   "owner": "owner3@gather.test",
+   "name": "Fennel & Finch Upper Room",
+   "neighbourhood": "Clerkenwell",
+   "borough": "Islington",
+   "venueType": "Restaurant private room",
+   "suits": [
+    "corporate",
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 50,
+    "seated": 40,
+    "mixed": 45
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 250000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 12000
+    },
+    "microphones": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 6000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A bright first-floor dining room with a private bar and a lift from the street.",
+   "accessNotes": "Lift to the first floor. Accessible toilet on the same level.",
+   "published": true
+  },
+  {
+   "slug": "v06-saltbox-gallery",
+   "owner": "owner3@gather.test",
+   "name": "Saltbox Gallery",
+   "neighbourhood": "Hoxton",
+   "borough": "Hackney",
+   "venueType": "Gallery",
+   "suits": [
+    "corporate",
+    "private",
+    "birthday"
+   ],
+   "capacity": {
+    "standing": 150,
+    "seated": 80,
+    "mixed": 110
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 380000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     1
+    ],
+    "blocked": [
+     "2027-03-19"
+    ]
+   },
+   "description": "White walls, polished concrete and gallery lighting. You bring the bar.",
+   "accessNotes": "Step-free throughout. AV is available on request but the owner has not confirmed what.",
+   "published": true
+  },
+  {
+   "slug": "v07-kiln-rooms",
+   "owner": "owner@gather.test",
+   "name": "The Kiln Rooms",
+   "neighbourhood": "Dalston",
+   "borough": "Hackney",
+   "venueType": "Converted pottery warehouse",
+   "suits": [
+    "birthday",
+    "wedding",
+    "private",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 200,
+    "seated": 120,
+    "mixed": 160
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 650000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "avTechnician": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 22000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-04-17",
+     "2027-05-01"
+    ]
+   },
+   "description": "Three old kiln bays opened into one long room with a raised stage at one end.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v08-brickwork-social",
+   "owner": "owner4@gather.test",
+   "name": "Brickwork Social",
+   "neighbourhood": "Spitalfields",
+   "borough": "Tower Hamlets",
+   "venueType": "Bar with function room",
+   "suits": [
+    "birthday",
+    "private",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 80,
+    "seated": 40,
+    "mixed": 60
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 300000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "loading": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-03-26"
+    ]
+   },
+   "description": "A basement function room under a busy Spitalfields bar, with its own entrance.",
+   "accessNotes": "Basement, stairs only.",
+   "published": true
+  },
+  {
+   "slug": "v09-thimble-thread",
+   "owner": "owner4@gather.test",
+   "name": "Thimble & Thread",
+   "neighbourhood": "Bermondsey",
+   "borough": "Southwark",
+   "venueType": "Former tailor's workshop",
+   "suits": [
+    "private",
+    "birthday",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 60,
+    "seated": 40,
+    "mixed": 50
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 190000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    },
+    "soundSystem": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A workshop with long cutting tables, now a calm space for dinners and workshops.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v10-signal-box",
+   "owner": "owner2@gather.test",
+   "name": "Riverside Signal Box",
+   "neighbourhood": "Wapping",
+   "borough": "Tower Hamlets",
+   "venueType": "Riverside loft",
+   "suits": [
+    "corporate",
+    "wedding",
+    "private"
+   ],
+   "capacity": {
+    "standing": 140,
+    "seated": 90,
+    "mixed": 110
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 580000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-04-17"
+    ]
+   },
+   "description": "A riverside loft with a wraparound balcony looking down the Thames.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v11-orchard-rooftop",
+   "owner": "owner3@gather.test",
+   "name": "Orchard House Rooftop",
+   "neighbourhood": "London Bridge",
+   "borough": "Southwark",
+   "venueType": "Rooftop terrace",
+   "suits": [
+    "corporate",
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 180,
+    "seated": 80,
+    "mixed": 120
+   },
+   "pricingModel": "per_head",
+   "pricePence": 4800,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "av": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 25000
+    },
+    "soundSystem": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 15000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-04-17"
+    ]
+   },
+   "description": "A planted rooftop with a retractable canopy and views over the river.",
+   "accessNotes": "Lift to the roof.",
+   "published": true
+  },
+  {
+   "slug": "v12-tin-chapel",
+   "owner": "owner4@gather.test",
+   "name": "The Tin Chapel",
+   "neighbourhood": "Peckham",
+   "borough": "Southwark",
+   "venueType": "Converted chapel hall",
+   "suits": [
+    "wedding",
+    "private",
+    "birthday"
+   ],
+   "capacity": {
+    "standing": 220,
+    "seated": 160,
+    "mixed": 180
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 320000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "av": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     1,
+     2
+    ],
+    "blocked": [
+     "2027-05-22"
+    ]
+   },
+   "description": "A corrugated-iron chapel from the 1890s with a high timber roof.",
+   "accessNotes": "Three steps at the main door. No ramp yet.",
+   "published": true
+  },
+  {
+   "slug": "v13-marlowe-club",
+   "owner": "owner@gather.test",
+   "name": "Marlowe Members' Club",
+   "neighbourhood": "Soho",
+   "borough": "Westminster",
+   "venueType": "Members' club",
+   "suits": [
+    "corporate",
+    "private",
+    "birthday"
+   ],
+   "capacity": {
+    "standing": 90,
+    "seated": 60,
+    "mixed": 70
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 750000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "loading": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "Panelled rooms and a long zinc bar on a quiet Soho street.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v14-cinder-screening",
+   "owner": "owner2@gather.test",
+   "name": "Cinder Screening Room",
+   "neighbourhood": "King's Cross",
+   "borough": "Camden",
+   "venueType": "Screening room",
+   "suits": [
+    "corporate",
+    "town_hall",
+    "private"
+   ],
+   "capacity": {
+    "standing": null,
+    "seated": 70,
+    "mixed": null
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 220000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A 70-seat screening room with raked seats, a big screen and a small bar foyer.",
+   "accessNotes": "Step-free to the back row.",
+   "published": true
+  },
+  {
+   "slug": "v15-lamplight-library",
+   "owner": "owner3@gather.test",
+   "name": "The Lamplight Library",
+   "neighbourhood": "Bloomsbury",
+   "borough": "Camden",
+   "venueType": "Library hall",
+   "suits": [
+    "corporate",
+    "town_hall",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 120,
+    "seated": 100,
+    "mixed": 110
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 450000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "avTechnician": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 20000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     6
+    ],
+    "blocked": []
+   },
+   "description": "A galleried reading room with green lamps and space for a lectern.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v16-mv-wren",
+   "owner": "owner4@gather.test",
+   "name": "MV Wren",
+   "neighbourhood": "Greenwich",
+   "borough": "Greenwich",
+   "venueType": "Riverboat",
+   "suits": [
+    "birthday",
+    "private",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 100,
+    "seated": 60,
+    "mixed": 80
+   },
+   "pricingModel": "per_head",
+   "pricePence": 7200,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     1,
+     2
+    ],
+    "blocked": []
+   },
+   "description": "A restored river cruiser that leaves from Greenwich pier for three-hour evening sailings.",
+   "accessNotes": "Gangway with steps.",
+   "published": true
+  },
+  {
+   "slug": "v17-foundry-hall",
+   "owner": "owner@gather.test",
+   "name": "Foundry Hall",
+   "neighbourhood": "Bow",
+   "borough": "Tower Hamlets",
+   "venueType": "Large warehouse",
+   "suits": [
+    "corporate",
+    "wedding",
+    "private",
+    "town_hall"
+   ],
+   "capacity": {
+    "standing": 400,
+    "seated": 250,
+    "mixed": 320
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 950000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "avTechnician": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 30000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-04-17",
+     "2027-06-12"
+    ]
+   },
+   "description": "A former bell foundry with a steel-truss roof and room for 400.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v18-pinehurst-suite",
+   "owner": "owner3@gather.test",
+   "name": "Pinehurst Conference Suite",
+   "neighbourhood": "Liverpool Street",
+   "borough": "City of London",
+   "venueType": "Hotel meeting room",
+   "suits": [
+    "corporate",
+    "town_hall"
+   ],
+   "capacity": {
+    "standing": 150,
+    "seated": 120,
+    "mixed": 130
+   },
+   "pricingModel": "per_head",
+   "pricePence": 5800,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "avTechnician": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     6
+    ],
+    "blocked": []
+   },
+   "description": "A day-light conference suite two minutes from Liverpool Street. Per-head rate includes lunch.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v19-wren-lane-loft",
+   "owner": "owner2@gather.test",
+   "name": "Wren Lane Loft",
+   "neighbourhood": "Clerkenwell",
+   "borough": "Islington",
+   "venueType": "Loft",
+   "suits": [
+    "private",
+    "birthday",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 35,
+    "seated": 24,
+    "mixed": 30
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 90000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "av": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A small top-floor loft with skylights. Bring your own drinks.",
+   "accessNotes": "Fourth floor, no lift.",
+   "published": true
+  },
+  {
+   "slug": "v20-little-ember",
+   "owner": "owner4@gather.test",
+   "name": "Little Ember Supper Club",
+   "neighbourhood": "Hackney Central",
+   "borough": "Hackney",
+   "venueType": "Supper club",
+   "suits": [
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 18,
+    "seated": 12,
+    "mixed": null
+   },
+   "pricingModel": "per_head",
+   "pricePence": 5500,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "no"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     1
+    ],
+    "blocked": []
+   },
+   "description": "Twelve seats around a single counter facing a wood-fired grill.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v21-hollow-oak",
+   "owner": "owner3@gather.test",
+   "name": "Hollow Oak Function Room",
+   "neighbourhood": "Kentish Town",
+   "borough": "Camden",
+   "venueType": "Pub function room",
+   "suits": [
+    "birthday",
+    "private",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 75,
+    "seated": 50,
+    "mixed": 60
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 120000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A wood-panelled room upstairs at a neighbourhood pub, with its own bar.",
+   "accessNotes": "Upstairs, no lift.",
+   "published": true
+  },
+  {
+   "slug": "v22-northlight-studio",
+   "owner": "owner@gather.test",
+   "name": "Northlight Studio",
+   "neighbourhood": "Hackney Wick",
+   "borough": "Hackney",
+   "venueType": "Photography studio",
+   "suits": [
+    "corporate",
+    "private"
+   ],
+   "capacity": {
+    "standing": 60,
+    "seated": 30,
+    "mixed": 40
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 150000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "catering": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A white-cyclorama daylight studio. Draft listing: not yet published.",
+   "accessNotes": "",
+   "published": false
+  },
+  {
+   "slug": "v23-southbank-terrace",
+   "owner": "owner2@gather.test",
+   "name": "Southbank Terrace Room",
+   "neighbourhood": "Waterloo",
+   "borough": "Lambeth",
+   "venueType": "Terrace room",
+   "suits": [
+    "corporate",
+    "wedding",
+    "private"
+   ],
+   "capacity": {
+    "standing": 130,
+    "seated": 80,
+    "mixed": 100
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 480000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A glass-fronted room opening onto a riverside terrace.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v24-brixton-vaults",
+   "owner": "owner4@gather.test",
+   "name": "Brixton Vaults",
+   "neighbourhood": "Brixton",
+   "borough": "Lambeth",
+   "venueType": "Railway arch",
+   "suits": [
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 250,
+    "seated": 120,
+    "mixed": 180
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 400000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     1,
+     2,
+     3
+    ],
+    "blocked": [
+     "2027-04-17"
+    ]
+   },
+   "description": "Two joined railway arches with a proper sound system and a dance floor.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v25-deptford-printworks",
+   "owner": "owner3@gather.test",
+   "name": "Deptford Printworks",
+   "neighbourhood": "Deptford",
+   "borough": "Lewisham",
+   "venueType": "Print warehouse",
+   "suits": [
+    "corporate",
+    "wedding",
+    "private",
+    "birthday"
+   ],
+   "capacity": {
+    "standing": 300,
+    "seated": 180,
+    "mixed": 240
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 550000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "storage": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 15000
+    },
+    "microphones": {
+     "state": "yes",
+     "charge": "priced",
+     "pricePence": 9000
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A cavernous ex-print hall with gantry lights and a loading bay.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v26-battersea-glasshouse",
+   "owner": "owner@gather.test",
+   "name": "Battersea Glasshouse",
+   "neighbourhood": "Battersea",
+   "borough": "Wandsworth",
+   "venueType": "Glasshouse",
+   "suits": [
+    "wedding",
+    "private",
+    "corporate"
+   ],
+   "capacity": {
+    "standing": 160,
+    "seated": 110,
+    "mixed": 130
+   },
+   "pricingModel": "per_head",
+   "pricePence": 8500,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "no"
+    },
+    "projector": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     1,
+     2
+    ],
+    "blocked": []
+   },
+   "description": "A Victorian glasshouse in a walled garden. Per-head rate includes a three-course menu.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v27-drawing-room",
+   "owner": "owner2@gather.test",
+   "name": "The Notting Hill Drawing Room",
+   "neighbourhood": "Notting Hill",
+   "borough": "Kensington and Chelsea",
+   "venueType": "Townhouse drawing room",
+   "suits": [
+    "private",
+    "birthday",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 40,
+    "seated": 28,
+    "mixed": 32
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 260000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "av": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": []
+   },
+   "description": "A first-floor drawing room with tall sash windows and a piano.",
+   "accessNotes": "Stairs only.",
+   "published": true
+  },
+  {
+   "slug": "v28-stratford-atrium",
+   "owner": "owner4@gather.test",
+   "name": "Stratford Atrium",
+   "neighbourhood": "Stratford",
+   "borough": "Newham",
+   "venueType": "Atrium event space",
+   "suits": [
+    "corporate",
+    "town_hall",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 350,
+    "seated": 200,
+    "mixed": 280
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 600000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "loading": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "soundSystem": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "avTechnician": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     6
+    ],
+    "blocked": []
+   },
+   "description": "A four-storey glass atrium in an office campus, available evenings and some weekdays.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v29-assembly-rooms",
+   "owner": "owner3@gather.test",
+   "name": "Walthamstow Assembly Hall",
+   "neighbourhood": "Walthamstow",
+   "borough": "Waltham Forest",
+   "venueType": "Community hall",
+   "suits": [
+    "birthday",
+    "private",
+    "wedding"
+   ],
+   "capacity": {
+    "standing": 200,
+    "seated": 150,
+    "mixed": 170
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 140000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "babyChanging": {
+     "state": "yes"
+    },
+    "staging": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "yes"
+    },
+    "parking": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "no"
+    },
+    "av": {
+     "state": "no"
+    }
+   },
+   "availability": null,
+   "description": "A sprung-floor community hall with a stage. The owner hasn't confirmed any dates yet.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v30-angel-canal-room",
+   "owner": "owner2@gather.test",
+   "name": "Angel Canal Room",
+   "neighbourhood": "Angel",
+   "borough": "Islington",
+   "venueType": "Canal-side room",
+   "suits": [
+    "corporate",
+    "birthday",
+    "private"
+   ],
+   "capacity": {
+    "standing": 90,
+    "seated": 56,
+    "mixed": 70
+   },
+   "pricingModel": "per_head",
+   "pricePence": 4200,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0
+    ],
+    "blocked": [
+     "2027-03-26"
+    ]
+   },
+   "description": "A narrow room on the Regent's Canal with a terrace for drinks.",
+   "accessNotes": "",
+   "published": true
+  },
+  {
+   "slug": "v31-cellar-aldgate",
+   "owner": "owner4@gather.test",
+   "name": "The Aldgate Cellar",
+   "neighbourhood": "Aldgate",
+   "borough": "City of London",
+   "venueType": "Wine cellar",
+   "suits": [
+    "corporate",
+    "private",
+    "birthday"
+   ],
+   "capacity": {
+    "standing": 55,
+    "seated": 30,
+    "mixed": 40
+   },
+   "pricingModel": "min_spend",
+   "pricePence": 200000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "bar": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "coatCheck": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "no"
+    },
+    "accessibleToilet": {
+     "state": "no"
+    },
+    "av": {
+     "state": "no"
+    },
+    "danceFloor": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     6
+    ],
+    "blocked": []
+   },
+   "description": "Brick vaults under a wine merchant, lit by candles.",
+   "accessNotes": "Steep stairs, no lift.",
+   "published": true
+  },
+  {
+   "slug": "v32-fitzrovia-glass-box",
+   "owner": "owner@gather.test",
+   "name": "Fitzrovia Glass Box",
+   "neighbourhood": "Fitzrovia",
+   "borough": "Camden",
+   "venueType": "Modern event space",
+   "suits": [
+    "corporate",
+    "town_hall",
+    "private"
+   ],
+   "capacity": {
+    "standing": 110,
+    "seated": 70,
+    "mixed": 90
+   },
+   "pricingModel": "hire_fee",
+   "pricePence": 360000,
+   "facilities": {
+    "toilets": {
+     "state": "yes"
+    },
+    "wifi": {
+     "state": "yes"
+    },
+    "tables": {
+     "state": "yes"
+    },
+    "chairs": {
+     "state": "yes"
+    },
+    "stepFree": {
+     "state": "yes"
+    },
+    "accessibleToilet": {
+     "state": "yes"
+    },
+    "catering": {
+     "state": "yes"
+    },
+    "setup": {
+     "state": "yes"
+    },
+    "av": {
+     "state": "yes"
+    },
+    "projector": {
+     "state": "yes"
+    },
+    "microphones": {
+     "state": "yes"
+    },
+    "videoConferencing": {
+     "state": "yes"
+    },
+    "danceFloor": {
+     "state": "no"
+    },
+    "parking": {
+     "state": "no"
+    },
+    "bar": {
+     "state": "no"
+    }
+   },
+   "availability": {
+    "from": "2026-12-01",
+    "to": "2027-06-30",
+    "closedWeekdays": [
+     0,
+     6
+    ],
+    "blocked": []
+   },
+   "description": "A glass-walled ground-floor space with a clean, flexible layout.",
+   "accessNotes": "",
+   "published": true
+  }
+ ]
+}

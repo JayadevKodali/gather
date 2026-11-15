@@ -1,0 +1,78 @@
+{
+  "labeller": "GPT, using the written planner rubric; Jay review pending",
+  "labelledAt": "2026-11-14",
+  "labels": {
+    "I01-two-dates": {
+      "acceptable": [
+        "v12-tin-chapel",
+        "v24-brixton-vaults"
+      ],
+      "notes": "The Tin Chapel (£3,200, 220 standing) and Brixton Vaults (£4,000, 250 standing) are open on 13 February and have both required facilities. Southwark is adjacent to Lambeth."
+    },
+    "I02-headcount-missing": {
+      "acceptable": [
+        "v27-drawing-room"
+      ],
+      "notes": "The Drawing Room seats 28, offers catering and bar service, and costs £2,600. The nearby Glasshouse clears the hard rules but 27 guests fill under a quarter of its 110-seat capacity."
+    },
+    "I03-layout-missing": {
+      "acceptable": [
+        "v14-cinder-screening"
+      ],
+      "notes": "Cinder Screening Room seats exactly 70 and includes the projector, microphones and video conferencing for £2,200. Nearby alternatives with the equipment exceed the £2,300 cap."
+    },
+    "I04-budget-conflict": {
+      "acceptable": [
+        "v06-saltbox-gallery"
+      ],
+      "notes": "Saltbox Gallery holds 110 mixed, has step-free access and storage, and is £3,800. The Loom Room is £4,200, above the clarified cap."
+    },
+    "I05-vague-wedding-date": {
+      "acceptable": [
+        "v12-tin-chapel"
+      ],
+      "notes": "The Tin Chapel seats 160, is open on 5 June and has dancing and staging for £3,200. Deptford Printworks clears the hard rules but is outside Lambeth and its neighbouring boroughs. Brixton Vaults only seats 120."
+    },
+    "I06-extras-at-cap": {
+      "acceptable": [
+        "v05-fennel-finch"
+      ],
+      "notes": "Fennel & Finch holds exactly 45 mixed and costs £2,500 minimum spend plus £120 for the projector and £60 for microphones. Pinehurst passes the hard rules, but the fixture describes a corporate/town-hall hotel meeting room rather than a suitable private celebration setting."
+    },
+    "I07-per-person-ceiling": {
+      "acceptable": [
+        "v25-deptford-printworks"
+      ],
+      "notes": "Deptford Printworks seats exactly 180 and has loading access. Its £5,500 hire plus £150 projector comes to £5,650, within the £5,760 total cap. Foundry Hall exceeds the cap."
+    },
+    "I08-range-flexible-guide": {
+      "acceptable": [
+        "v10-signal-box"
+      ],
+      "notes": "Riverside Signal Box holds exactly 110 mixed and has step-free access, video conferencing and preferred catering. Its £5,800 estimate is within the £5,980 judgement limit (15% above the guide). Stratford Atrium at £6,000 just misses that limit, and Lamplight Library sits outside the target area and neighbours."
+    },
+    "I09-access-and-negation": {
+      "acceptable": [
+        "v26-battersea-glasshouse"
+      ],
+      "notes": "Battersea Glasshouse is in adjacent Wandsworth, confirms all three access essentials and preferred parking, and costs 72 × £85 = £6,120. The nearby Southbank Terrace lacks confirmed baby changing."
+    },
+    "I10-no-budget-draft": {
+      "acceptable": [
+        "v01-loom-room",
+        "v02-copper-arch",
+        "v06-saltbox-gallery",
+        "v10-signal-box"
+      ],
+      "notes": "These four published local or adjacent options have loading and Wi-Fi, fit standing and suit a corporate demo. The other local or adjacent eligible options exceed 152 capacity, so 38 guests would fill less than a quarter. Northlight Studio is a draft and cannot appear."
+    },
+    "I11-unpriced-must-have": {
+      "acceptable": [],
+      "notes": "Glass Yard seats 65 and its £4,225 base clears the cap, but required setup has no confirmed price. Other listings miss a required facility, capacity, availability or the hard cap."
+    },
+    "I12-unconfirmed-date": {
+      "acceptable": [],
+      "notes": "Assembly Rooms seats 150, offers all three access essentials and costs £1,400, but its fixture has no confirmed bookable dates. No other listing passes all hard checks."
+    }
+  }
+}

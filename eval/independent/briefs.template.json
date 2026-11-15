@@ -1,0 +1,22 @@
+{
+  "_note": "Copy to briefs.json. Independent briefs written by Jay + GPT. Gold = what a careful human extracts after the follow-ups. Dates must be within 2026-12-01..2027-06-30 (the fixture calendar).",
+  "today": "2026-11-14",
+  "cases": [
+    {
+      "id": "I01-example",
+      "scenario": "One-line description of what this brief tests",
+      "text": "The planner's messy wording goes here",
+      "followUps": [{ "field": "date", "answer": "12 May 2027" }],
+      "gold": {
+        "date": "2027-05-12",
+        "guests": 60,
+        "layout": "standing",
+        "boroughs": ["Southwark"],
+        "budget": { "mode": "flexible", "amountPence": 300000, "basis": "total" },
+        "eventType": "corporate",
+        "facilities": { "av": "essential" }
+      },
+      "expectNoMatch": false
+    }
+  ]
+}

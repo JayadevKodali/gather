@@ -1,0 +1,1655 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A clickable prototype of the Gather venue booking journey.">
+<title>Gather · Booking prototype</title>
+<style>
+:root{--paper:#f7f7f0;--white:#fffef9;--ink:#172d27;--green:#175340;--mint:#e1eee5;--soft:#4e6157;--line:#cdd8cb;--warm:#f5e8d5;--serif:Georgia,serif;--sans:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.5 var(--sans)}
+header{border-bottom:1px solid var(--line);background:var(--white)}
+.bar,main,footer{max-width:1160px;margin:auto;padding-inline:32px}
+.bar{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font:700 32px/1 var(--serif);letter-spacing:-.075em;color:var(--green);padding:0;border:0;background:none}
+nav,.actions,.chips{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+nav button{background:none;color:var(--soft);border:0;padding:8px 10px}
+nav .auth-nav{border:1px solid var(--line);color:var(--green)}
+nav .auth-nav.primary{border-color:var(--green);background:var(--green);color:white}
+nav .refresh{border:1px solid var(--line);color:var(--green)}
+.account-label{padding:5px 10px;background:var(--mint);color:var(--green);border-radius:20px;font-size:.86rem;font-weight:700}
+.account-label[hidden]{display:none}
+main{padding-block:44px 60px;min-height:74vh}
+footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px 24px;border-top:1px solid var(--line);color:var(--soft);font-size:.88rem}
+.demo-controls summary{cursor:pointer;color:var(--green);font-weight:650}
+.demo-controls .actions{margin-top:9px}
+.demo-controls button{padding:5px 9px;font-size:.84rem}
+.demo-controls button[aria-current="page"]{background:var(--mint)}
+@media(max-width:620px){footer{flex-direction:column;align-items:flex-start}}
+h1,h2{font-family:var(--serif);font-weight:500;line-height:1.03;letter-spacing:-.045em;margin:0 0 16px}
+h1{font-size:clamp(36px,6vw,67px);max-width:740px}
+h2{font-size:clamp(23px,3vw,32px)}
+h3{font-size:1rem;margin:0 0 7px}
+p{margin:0 0 14px}
+.lead{max-width:640px;color:var(--soft);font-size:1.07rem}
+.context{color:var(--green);font-size:.76rem;font-weight:750;letter-spacing:.09em;text-transform:uppercase;margin-bottom:12px}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;padding:32px 0 24px}
+.hero h1{font-size:clamp(46px,7.3vw,86px)}
+.hero .actions{margin-top:24px}
+.cover{background:#e2ece2;padding:24px;border:1px solid #c1d2c1;border-radius:22px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between}
+.cover-window{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:20px}
+.cover-window p{margin:0}
+.cover-window h2{margin-bottom:10px}
+.cover-brief{font:italic 23px/1.25 var(--serif);max-width:360px;margin-bottom:24px}
+.card,.callout{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card + .card{margin-top:14px}
+.callout{background:var(--mint);padding:14px 16px;margin:16px 0}
+.callout.warning{background:var(--warm);border-color:#dfc9a9}
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start;margin-top:26px}
+.grid > *{min-width:0}
+.narrow{max-width:640px;margin-top:24px}
+button{border:1px solid var(--line);background:var(--white);color:var(--green);cursor:pointer;border-radius:8px;padding:10px 14px;font:inherit;font-weight:650}
+button.primary{background:var(--green);color:#fff;border-color:var(--green)}
+button.text{padding:5px 0;background:none;border:0;text-decoration:underline;text-underline-offset:3px}
+button:hover{filter:brightness(.95)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #267350;outline-offset:3px}
+label{display:block;margin:12px 0 5px;font-weight:670}
+input,textarea,select{font:inherit;color:var(--ink);display:block;width:100%;background:white;border:1px solid #a9bbaa;border-radius:8px;padding:10px 11px}
+textarea{min-height:105px;resize:vertical}
+input[type=checkbox]{width:auto;display:inline;margin:0 5px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.muted,.hint{color:var(--soft)}
+.hint,small{font-size:.87rem}
+.chip{display:inline-block;background:var(--mint);border-radius:20px;padding:4px 9px;font-size:.8rem;font-weight:650}
+.rows{margin:0}
+.rows div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.rows div:last-child{border-bottom:0}
+.rows dd{margin:0;text-align:right;font-weight:650}
+.match{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.match h2{margin-bottom:7px}
+.match .actions{grid-column:1/-1}
+.price{white-space:nowrap;font-weight:750;color:var(--green)}
+.steps{display:flex;gap:10px;flex-wrap:wrap;padding:0;margin:0 0 19px;list-style:none;color:var(--soft);font-size:.87rem}
+.steps li{border-bottom:2px solid var(--line);padding:0 3px 5px}
+.steps [aria-current="step"]{color:var(--green);font-weight:750;border-color:var(--green)}
+.split{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.stat{font:500 36px/1 var(--serif);color:var(--green)}
+#notice:empty{display:none}
+#notice{max-width:1100px;margin:14px auto 0;padding:10px 16px;background:var(--warm);border-radius:8px;color:var(--ink)}
+@media(max-width:760px){.bar,main,footer{padding-inline:18px}.bar{align-items:flex-start;flex-direction:column;gap:9px;padding-block:15px}nav button{padding:6px 9px}.hero,.grid{grid-template-columns:1fr;gap:18px}.hero{padding-top:4px}.cover{min-height:240px}.match{grid-template-columns:1fr}.match .actions{grid-column:auto}main{padding-block:30px 44px}}
+.calendar{margin-top:26px}
+.calendar-toolbar{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.calendar-toolbar h2{margin-bottom:0}
+.calendar-toolbar select{max-width:240px}
+.calendar-toolbar label{margin:0 0 3px}
+.calendar-legend{display:flex;align-items:center;gap:6px 15px;flex-wrap:wrap;margin:0 0 12px;padding:0;list-style:none;font-size:.79rem;color:var(--soft)}
+.calendar-legend li{display:flex;align-items:center;gap:5px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--event-dot)}
+.event-green{--event-bg:#e0f0e6;--event-ink:#174a33;--event-dot:#28734e}
+.event-purple{--event-bg:#eee5fa;--event-ink:#543878;--event-dot:#8155ac}
+.event-blue{--event-bg:#e1eef9;--event-ink:#244e73;--event-dot:#3977a5}
+.event-amber{--event-bg:#fbedd1;--event-ink:#694710;--event-dot:#a66a19}
+.event-grey{--event-bg:#edf0ed;--event-ink:#48534c;--event-dot:#748079}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px}
+.calendar-weekday,.calendar-day,.calendar-outside{background:var(--white);min-width:0}
+.calendar-weekday{padding:6px 4px;text-align:center;font-size:.75rem;font-weight:750;color:var(--soft)}
+.calendar-day,.calendar-outside{min-height:77px;padding:5px}
+.calendar-outside{background:var(--paper)}
+.calendar-number{display:block;padding:2px 3px;font-size:.82rem;font-weight:660}
+.calendar-entry{position:relative;margin-top:3px}
+.calendar-event{display:block;width:100%;text-align:left;padding:4px 5px;border:0;border-left:3px solid var(--event-dot);border-radius:4px;background:var(--event-bg);color:var(--event-ink);font-size:.75rem;line-height:1.25}
+.calendar-event-label{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calendar-tooltip{display:none;position:absolute;z-index:2;top:calc(100% + 5px);left:0;width:min(225px,54vw);padding:9px 11px;background:var(--ink);color:white;border-radius:7px;font-size:.78rem;line-height:1.45;pointer-events:none;box-shadow:0 5px 18px #0002}
+.calendar-day:nth-child(7n) .calendar-tooltip,.calendar-day:nth-child(7n + 6) .calendar-tooltip,.calendar-day:nth-child(7n + 5) .calendar-tooltip{left:auto;right:0}
+.calendar-event:hover + .calendar-tooltip,.calendar-event:focus-visible + .calendar-tooltip{display:block}
+.calendar-event:focus-visible{outline-offset:1px}
+.calendar-tooltip strong,.calendar-tooltip span{display:block}
+@media(max-width:620px){.calendar{padding:12px}.calendar-day,.calendar-outside{min-height:48px;padding:2px}.calendar-weekday{font-size:.68rem}.calendar-event{padding:3px 2px;border-left-width:2px}.calendar-event-label{font-size:.65rem}.calendar-toolbar{gap:10px}}
+.auth-grid{max-width:860px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.auth-card{padding:clamp(18px,4vw,30px)}
+.auth-card label:first-of-type{margin-top:0}
+.auth-card .hint{margin:8px 0 0}
+.auth-card input[readonly]{background:var(--paper);color:var(--soft)}
+.auth-card .actions{margin-top:18px}
+.auth-aside{background:var(--mint)}
+.auth-aside h3{margin-top:18px}
+.auth-aside p:last-child{margin-bottom:0}
+@media(max-width:760px){.auth-grid{grid-template-columns:1fr}}
+.quote-services{margin:16px 0 12px;padding:12px;border:1px solid var(--line);border-radius:8px}
+.quote-services legend{padding:0 5px;font-weight:700}
+.quote-services .hint{margin:0 0 8px}
+.quote-meta{color:var(--soft);font-size:.9rem}
+.quote-actions{margin-top:14px}
+.quote-log{padding-left:20px;overflow-wrap:anywhere}
+.quote-log li{margin:8px 0}
+.amenity-price{margin-top:8px}
+.quote-search{max-width:500px;margin-bottom:18px}
+.quote-service{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,.55fr) auto;gap:8px;align-items:end;margin-bottom:10px}
+.quote-service label{margin-top:0}
+.quote-service button{padding:10px 9px}
+@media(max-width:450px){.quote-service{grid-template-columns:1fr 1fr}.quote-service button{grid-column:1/-1;justify-self:start}}
+.facilities{border:1px solid var(--line);border-radius:10px;margin:16px 0;background:var(--white)}
+.facilities>summary{padding:12px 14px;font-weight:700;cursor:pointer;color:var(--green)}
+.facilities>summary:hover{background:var(--mint);border-radius:10px}
+.facilities>summary small{font-weight:500;color:var(--soft);margin-left:6px}
+.facilities-body{padding:0 14px 14px}
+.facilities-body fieldset{border:0;padding:0;margin:12px 0 0;min-width:0}
+.facilities-body legend{font-weight:700;padding:0}
+.facility-group{border-top:1px solid var(--line);margin-top:12px;padding-top:8px}
+.facility-group>summary{padding:5px 0;cursor:pointer;color:var(--green);font-size:.92rem;font-weight:700}
+.facility-group .facilities-fields{margin-top:8px}
+.facility-category{font-size:.91rem;margin:14px 0 0}
+.facilities-body label{font-size:.89rem;margin-top:0}
+.facility-label{display:flex;align-items:baseline;gap:7px}
+.av-help{position:relative;display:inline-flex}
+.av-help button{display:inline-grid;place-items:center;width:25px;height:25px;padding:0;border:1px solid var(--line);border-radius:50%;font-size:.8rem;line-height:1}
+.av-help [role="tooltip"]{display:none;position:absolute;z-index:5;bottom:calc(100% + 6px);right:0;width:min(215px,60vw);padding:9px 11px;border-radius:8px;background:var(--ink);color:var(--paper);box-shadow:0 4px 12px #18241b26;font-size:.81rem;line-height:1.4}
+.av-help:not([data-dismissed]):hover [role="tooltip"],
+.av-help:not([data-dismissed]):focus-within [role="tooltip"],
+.av-help[data-open] [role="tooltip"]{display:block}
+.av-help [role="tooltip"]::after{content:"";position:absolute;top:100%;left:0;right:0;height:6px}
+.facilities-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.facilities-body .field{min-width:0}
+.facilities-body textarea{min-height:72px}
+.facilities-body .facility-notes{margin-top:12px}
+.facilities-result{grid-column:1/-1;margin:0}
+.facilities-result .rows dd{max-width:58%}
+.facility-matches{margin-bottom:8px}
+@media(max-width:480px){.facilities-fields{grid-template-columns:1fr}}
+.history-filters{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.history-filters label,.shortlist-sort label{margin-top:0}
+.history-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;margin-top:14px}
+.history-list .card,.listing-grid .card{margin:0}
+.listing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:16px;margin-top:24px}
+.listing-grid .actions,.listing-back{margin-top:16px}
+.listing-grid .card{cursor:pointer}
+.listing-draft{background:var(--warm)}
+.history-list .actions,.history-detail .actions{margin-top:16px}
+.shortlist-sort{margin:0 0 14px;max-width:260px}
+.checkout-card{padding:clamp(18px,4vw,30px)}
+.checkout-card h2{margin:10px 0 6px}
+.checkout-card .hint:last-child{margin-bottom:0}
+.checkout-badge{display:inline-block;background:var(--warm);color:#654718;border-radius:5px;padding:4px 8px;font-size:.76rem;font-weight:750}
+.checkout-total{margin:17px 0;padding:12px 15px;background:var(--mint);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.checkout-total strong{font-size:1.25rem}
+.checkout-card .primary{width:100%;margin:14px 0 7px}
+.checkout-card .text{margin-top:6px}
+@media(max-width:380px){.two,.split{grid-template-columns:1fr}}
+.admin-toolbar{display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:26px 0 14px}
+.admin-toolbar label{margin-top:0}
+.admin-toolbar p{margin:0}
+.admin-panels{display:grid;gap:12px}
+.admin-panels > details{background:var(--white);border:1px solid var(--line);border-radius:14px}
+.admin-panels > details[open] > summary{border-bottom:1px solid var(--line)}
+.admin-panels summary{display:grid;grid-template-columns:minmax(0,1fr) auto 16px;align-items:center;gap:12px;padding:16px 19px;color:var(--green);cursor:pointer;list-style:none}
+.admin-panels summary::-webkit-details-marker{display:none}
+.admin-panels summary::after{content:"+";font-size:1.2rem;text-align:center}
+.admin-panels details[open] > summary::after{content:"−"}
+.admin-panels summary:focus-visible,.admin-table-wrap:focus-visible{outline:2px solid #267350;outline-offset:2px;border-radius:8px}
+.admin-summary-label{font-weight:720}
+.admin-summary-value{color:var(--soft);font-size:.875rem;text-align:right}
+.admin-detail{padding:16px 19px 19px}
+.admin-detail > :last-child{margin-bottom:0}
+.admin-detail h3:not(:first-child){margin-top:20px}
+.admin-totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:0 0 16px}
+.admin-totals div{padding:10px 12px;background:var(--mint);border-radius:9px}
+.admin-totals dt{font-size:.82rem;color:var(--soft)}
+.admin-totals dd{font-weight:680;margin:2px 0 0}
+.admin-table-wrap{overflow-x:auto;margin:0 0 10px}
+.admin-table{border-collapse:collapse;width:100%;font-size:.88rem}
+.admin-table th,.admin-table td{text-align:left;vertical-align:top;padding:8px 9px;border-bottom:1px solid var(--line)}
+.admin-table th{font-size:.78rem;color:var(--soft);white-space:nowrap}
+.admin-table td:first-child{font-weight:620}
+.admin-empty{color:var(--soft);margin:8px 0}
+@media(max-width:620px){.admin-panels summary,.admin-detail{padding-inline:12px}.admin-summary-value{font-size:.77rem}.admin-table th,.admin-table td{padding-inline:6px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<button class="brand" type="button" data-action="home" aria-label="Gather home">Gather</button>
+<nav aria-label="Account">
+<span class="account-label" id="account-label" hidden></span>
+<button class="auth-nav" type="button" data-action="signin" id="nav-signin">Sign in</button>
+<button class="auth-nav primary" type="button" data-action="signup" id="nav-signup">Sign up</button>
+<button class="auth-nav" type="button" data-action="signout" id="nav-signout" hidden>Sign out</button>
+<button class="refresh" type="button" data-action="refresh" title="Load the latest demo version">Refresh demo</button>
+</nav>
+</div></header>
+<div id="notice" role="status"></div>
+<main id="app"></main>
+<footer>
+<span>Prototype · Synthetic venues · Simulated payments</span>
+<details class="demo-controls" id="demo-controls">
+<summary>Demo controls</summary>
+<div class="actions" role="group" aria-label="Preview roles">
+<button type="button" data-action="preview-role" data-id="planner" id="demo-planner">Planner</button>
+<button type="button" data-action="preview-role" data-id="venue" id="demo-venue">Venue owner</button>
+<button type="button" data-action="preview-role" data-id="admin" id="demo-admin">Admin</button>
+<button class="text" type="button" data-action="reset">Reset demo</button>
+</div>
+</details>
+</footer>
+<script>
+"use strict";
+const demoDate = "2027-03-26";
+const demoBrief = "I need somewhere near Shoreditch for 80 people standing in late March, under £6,000, with AV.";
+const byId = id => document.getElementById(id);
+const clean = value => String(value ?? "").replace(/[&<>"']/g, character =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
+const pounds = number => new Intl.NumberFormat("en-GB", {
+  style: "currency", currency: "GBP", minimumFractionDigits: Number.isInteger(number) ? 0 : 2, maximumFractionDigits: 2
+}).format(number);
+const pence = poundsValue => Math.round(Number(poundsValue) * 100);
+const remainingBalance = request => (pence(request.quote) - pence(request.deposit)) / 100;
+const dateLabel = iso => iso ? new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "UTC"
+}) : "Choose a date";
+const sampleCalendar = [
+  {id:"sample-launch",venueId:"loom",date:"2027-03-12",title:"Product launch",booker:"Maya Ellis",eventType:"corporate",
+    status:"confirmed",colour:"green",guests:65,layout:"standing",quote:3600,deposit:720,reference:"GTH-S101",
+    brief:"A presentation and drinks reception. The organiser needs a projector and two microphones."},
+  {id:"sample-dinner",venueId:"loom",date:"2027-03-20",title:"Team dinner",booker:"Priya Shah",eventType:"corporate",
+    status:"confirmed",colour:"purple",guests:48,layout:"seated",quote:2900,deposit:580,reference:"GTH-S102",
+    brief:"A seated dinner with space for a short awards presentation."},
+  {id:"sample-workshop",venueId:"loom",date:"2027-03-24",title:"Design workshop",booker:"Jamie Cole",eventType:"other",
+    status:"pending",colour:"amber",guests:36,layout:"mixed",
+    brief:"A workshop with table seating and an open breakout area. The planner has asked about a screen."},
+  {id:"sample-offsite",venueId:"arch",date:"2027-03-17",title:"Team offsite",booker:"Alex Planner",plannerEmail:"planner@example.com",eventType:"corporate",
+    status:"confirmed",colour:"green",guests:50,layout:"seated",quote:5100,deposit:1020,reference:"GTH-S103",
+    brief:"A team offsite with a projector and breakout space."},
+  {id:"sample-party",venueId:"glass",date:"2027-04-10",title:"Birthday reception",booker:"Alex Planner",plannerEmail:"planner@example.com",eventType:"birthday",
+    status:"confirmed",colour:"purple",guests:60,layout:"standing",quote:3900,deposit:780,reference:"GTH-S104",
+    brief:"A standing birthday reception for 60 guests."}
+];
+const accountLabels={planner:"Planner",venue:"Venue owner",admin:"Admin"};
+const demoProfiles={
+  planner:{name:"Alex Planner",email:"planner@example.com"},
+  venue:{name:"Sam Venue",email:"venue@example.com"},
+  admin:{name:"Amara Osei",email:"admin@example.com"}
+};
+const initialState = () => ({
+  role: "home", page: "home", plannerPage: "brief", ownerPage: "listing",
+  accounts: {planner: null, venue: null}, signedIn: {planner: false, venue: false, admin: false}, adminSignUps: [], adminBriefs: [], currentBriefId: "", raw: "",
+  event: {date: "", type: "", guests: 80, layout: "standing", area: "Shoreditch", budget: 6000, facilities: {av:"essential"}},
+  venues: [
+    {id:"loom",ownerEmail:"venue@example.com",name:"The Loom Room",area:"Shoreditch",kind:"Warehouse studio",standing:120,seated:70,mixed:90,price:4200,model:"Hire fee",facilities:{stepFree:"yes",wifi:"yes",av:"yes",catering:"no",parking:"no",loading:"yes",setup:"yes",babyChanging:"yes",bar:"yes",tables:"yes",chairs:"yes",staging:"yes",danceFloor:"no",coatCheck:"yes",storage:"yes",projector:"yes",microphones:"yes",soundSystem:"yes",videoConferencing:"no",avTechnician:"yes"},toilets:{women:2,men:1,shared:1,accessible:1},accessNotes:"Level entrance and event room. Accessible shared toilet is on the same floor.",equipmentNotes:"70 chairs and 12 tables included.",amenityPrices:{bar:300,microphones:80,avTechnician:180,setup:250},blocked:[],published:true},
+    {id:"arch",ownerEmail:"venue@example.com",name:"Copper Arch Studio",area:"Hackney",kind:"Event studio",standing:100,seated:60,mixed:80,price:5100,model:"Minimum spend",facilities:{stepFree:"unknown",wifi:"yes",av:"yes",catering:"yes",parking:"yes",loading:"yes",setup:"yes",babyChanging:"unknown",bar:"yes",tables:"yes",chairs:"yes",staging:"no",danceFloor:"yes",coatCheck:"yes",storage:"no",projector:"yes",microphones:"no",soundSystem:"yes",videoConferencing:"yes",avTechnician:"no"},toilets:{women:2,men:2,shared:0,accessible:null},accessNotes:"Confirm the entrance route and accessible toilet with the venue.",blocked:[],published:true},
+    {id:"glass",ownerEmail:"venue@example.com",name:"The Glass Yard",area:"Bethnal Green",kind:"Courtyard venue",standing:95,seated:65,mixed:75,price:65,model:"Per head",facilities:{stepFree:"no",wifi:"unknown",av:"yes",catering:"no",parking:"no",loading:"no",setup:"unknown",babyChanging:"no",bar:"yes",tables:"yes",chairs:"yes",staging:"no",danceFloor:"yes",coatCheck:"unknown",storage:"no",projector:"no",microphones:"yes",soundSystem:"yes",videoConferencing:"unknown",avTechnician:"unknown"},toilets:{women:0,men:0,shared:2,accessible:0},accessNotes:"Two steps at the event entrance.",blocked:[],published:true},
+    {id:"table",ownerEmail:"owner.alder@example.com",name:"Alder Private Dining",area:"Shoreditch",kind:"Private dining room",standing:45,seated:32,mixed:null,price:1800,model:"Hire fee",facilities:{stepFree:"yes",wifi:"yes",av:"no",catering:"yes",parking:"no",loading:"unknown",setup:"yes",babyChanging:"yes",bar:"yes",tables:"yes",chairs:"yes",staging:"no",danceFloor:"no",coatCheck:"no",storage:"no",projector:"no",microphones:"no",soundSystem:"no",videoConferencing:"no",avTechnician:"no"},toilets:{women:0,men:0,shared:2,accessible:1},accessNotes:"Level route from the entrance to the dining room and accessible toilet.",blocked:[],published:true}
+  ],
+  selected: "", request: null, requests: [], bookings: [], quoteMode: "", quoteLookup: {planner:"",venue:""}, quoteRef: {planner:"",venue:""}, showRemoved: {planner:false,venue:false},
+  adminPeriod:"30", adminOpen:["pilot"],
+  shortlistSort: "match", historySort: {planner:"date-asc",venue:"date-asc"}, historyVenue: "", historySelection: {planner:null,venue:null},
+  ownerListingId:"", calendarVenueId:"loom", calendarMonth:demoDate.slice(0,7), calendarEntryId:""
+});
+const demoStorageKey="gather-quotes-v1";
+function loadDemoState(){
+  const base=initialState();
+  try{
+    const data=JSON.parse(localStorage.getItem(demoStorageKey));
+    if(Array.isArray(data?.requests) && Array.isArray(data.venues) && Array.isArray(data.bookings)) return {...base,...data};
+  }catch{/* Continue with sample data. */}
+  return base;
+}
+function saveDemoState(){
+  const {venues,requests,bookings,adminSignUps,adminBriefs}=state;
+  try{localStorage.setItem(demoStorageKey,JSON.stringify({venues,requests,bookings,adminSignUps,adminBriefs}));}
+  catch{/* The demo still works for this session. */}
+}
+let state=loadDemoState();
+let notice = "";
+const venue = id => state.venues.find(item => item.id === id);
+const ownedVenues = () => state.venues.filter(item=>item.ownerEmail===state.accounts.venue?.email);
+const ownedVenue = id => ownedVenues().find(item=>item.id===id);
+const calendarVenue = () => ownedVenue(state.calendarVenueId) || ownedVenues()[0];
+const eventCost = (item, event) => item.model === "Per head" ? item.price * event.guests : item.price;
+const eventTypes = [
+  ["birthday","Birthday",/\bbirthday\b/],
+  ["wedding","Wedding",/\bwedding\b/],
+  ["town-hall","Corporate town hall",/\btown[ -]?hall\b/],
+  ["corporate","Corporate event",/\b(?:corporate|conference|team offsite|product launch)\b/],
+  ["private","Private party",/\bprivate party\b/]
+];
+const eventTypeLabel = value => eventTypes.find(([id]) => id===value)?.[1] ||
+  (value==="other"?"Other event":"Not specified");
+const layouts = {standing:"Standing",seated:"Seated",mixed:"Mixed (standing and seated)"};
+const facilityGroups=[
+  ["Accessibility",[
+    ["stepFree","Step-free access to the event space"],["accessibleToilet","Wheelchair-accessible toilet"],
+    ["babyChanging","Baby-changing facilities"]
+  ]],
+  ["General amenities",[
+    ["toilets","Guest toilets"],["wifi","Guest Wi-Fi"],["bar","Bar service"],
+    ["catering","Catering or kitchen access"],["parking","Parking"],["loading","Loading access"]
+  ]],
+  ["Furniture and setup",[
+    ["tables","Tables"],["chairs","Chairs"],["staging","Staging"],["danceFloor","Dance floor"],
+    ["coatCheck","Coat check"],["storage","Storage"],["setup","Setup assistance"]
+  ]],
+  ["Event technology",[
+    ["av","Audio-visual equipment (AV)"],["projector","Projector and screen"],
+    ["microphones","Microphones"],["soundSystem","Sound system"],
+    ["videoConferencing","Video conferencing"],["avTechnician","On-site AV technician"]
+  ]]
+];
+const facilities=facilityGroups.flatMap(([, items])=>items);
+const toiletTypes=[["women","Women’s cubicles"],["men","Men’s cubicles"],["shared","Shared or unisex cubicles"]];
+const toiletFields=[...toiletTypes,["accessible","Wheelchair-accessible cubicles"]];
+const availabilityLabels={yes:"Available",no:"Unavailable",unknown:"Not confirmed"};
+const preferenceLevels=[["","Any"],["preferred","Preferred"],["essential","Essential"]];
+function facilityStatus(item,id){
+  const toilets=item.toilets;
+  if(id==="accessibleToilet"){
+    if(toilets.accessible===null) return "unknown";
+    return toilets.accessible>0?"yes":"no";
+  }
+  if(id==="toilets"){
+    const counts=toiletTypes.map(([key])=>toilets[key]);
+    if(toilets.accessible>0 || counts.some(count=>count>0)) return "yes";
+    return counts.every(count=>count===0)?"no":"unknown";
+  }
+  return item.facilities[id] || "unknown";
+}
+function facilitySelections(event,level){
+  return facilities.filter(([id])=>event.facilities[id]===level);
+}
+function preferredMatches(item,event){
+  return facilitySelections(event,"preferred").filter(([id])=>facilityStatus(item,id)==="yes").length;
+}
+const booked = (venueId, date) => state.bookings.some(entry=>entry.venueId===venueId && entry.event.date===date) ||
+  sampleCalendar.some(entry=>entry.venueId===venueId && entry.date===date && entry.status==="confirmed");
+const available = (item, day) => item.published && !item.blocked.includes(day) && !booked(item.id,day);
+const fits = (item, event) => available(item,event.date) &&
+  item[event.layout] != null && item[event.layout] >= event.guests &&
+  facilitySelections(event,"essential").every(([id])=>facilityStatus(item,id)==="yes");
+const matches = () => state.venues.filter(item => fits(item,state.event))
+  .sort((a,b) => preferredMatches(b,state.event)-preferredMatches(a,state.event) || Number(b.area.toLowerCase() === state.event.area.toLowerCase()) -
+    Number(a.area.toLowerCase() === state.event.area.toLowerCase()) ||
+    Number(eventCost(a,state.event) > state.event.budget) -
+    Number(eventCost(b,state.event) > state.event.budget) ||
+    eventCost(a,state.event) - eventCost(b,state.event)).slice(0,5);
+const priceSorts=[["price-asc","Price: low to high"],["price-desc","Price: high to low"]];
+const historySorts=[["date-asc","Event date: earliest first"],["date-desc","Event date: latest first"],...priceSorts];
+function selectOptions(options,selected){
+  return options.map(([value,label])=>'<option value="'+clean(value)+'"'+
+    (value===selected?' selected':'')+'>'+clean(label)+'</option>').join("");
+}
+function sortedByPrice(items,sort,price){
+  if(sort==="match") return items;
+  return items.sort((a,b)=>sort==="price-asc"?price(a)-price(b):price(b)-price(a));
+}
+const button = (action,label,style="",id="") =>
+  '<button type="button" class="' + style + '" data-action="' + action + '"' +
+  (id ? ' data-id="' + clean(id) + '"' : '') + '>' + clean(label) + '</button>';
+const title = (context,heading,lead="") => '<p class="context">'+clean(context)+'</p><h1 tabindex="-1">'+
+  clean(heading)+'</h1>'+(lead?'<p class="lead">'+clean(lead)+'</p>':'');
+const row = (label,value) => '<div><dt>'+clean(label)+'</dt><dd>'+clean(value)+'</dd></div>';
+const eventSummary = (event = state.event) => '<dl class="rows">'+row("Date",dateLabel(event.date))+
+  row("Event type",eventTypeLabel(event.type))+row("Guests",event.guests)+row("Layout",layouts[event.layout])+row("Area",event.area || "Any London area")+
+  row("Budget",pounds(event.budget))+
+  facilitySelections(event,"essential").map(([,label])=>row(label,"Essential")).join("")+
+  facilitySelections(event,"preferred").map(([,label])=>row(label,"Preferred")).join("")+'</dl>';
+const card = body => '<section class="card">'+body+'</section>';
+const callout = (text,warning=false) => '<p class="callout'+(warning?' warning':'')+'">'+clean(text)+'</p>';
+const submit = label => '<button class="primary" type="button" data-submit>'+clean(label)+'</button>';
+function go(role,page){
+  if(role!==state.role || page!==state.page) state.quoteMode="";
+  state.role=role;state.page=page;
+  if(page==="home" || page==="signup" || page==="signin") return;
+  if(role==="planner") state.plannerPage=page;
+  if(role==="venue") state.ownerPage=page;
+}
+function home(){
+  const entry=state.signedIn[state.role]
+    ? button("account-home","Back to my workspace","primary")
+    : button("signup","Sign up","primary")+button("signin","Sign in");
+  return '<section class="hero"><div>'+title("London venue booking","Welcome to Gather.",
+    "Find an independent London venue for your event, or list your space and manage enquiries in one place.")+
+    '<div class="actions">'+entry+'</div></div>'+
+    '<aside class="cover" aria-label="Example brief and match"><p class="cover-brief">“80 standing near Shoreditch, under £6,000, with AV.”</p>'+
+    '<div class="cover-window"><p class="context">Example venue</p><h2>The Loom Room</h2><p class="muted">Shoreditch · 120 standing · AV included</p></div></aside></section>';
+}
+function authScreen(mode){
+  const creating=mode==="signup";
+  const roleOptions=[["planner","Planner"],["venue","Venue owner"]];
+  if(!creating) roleOptions.push(["admin","Admin"]);
+  const nameField=creating?'<label for="auth-name">Full name</label>'+
+    '<input required id="auth-name" name="name" maxlength="60" autocomplete="off" placeholder="e.g. Alex Planner">':"";
+  return title("Demo account",creating?"Create your Gather account":"Sign in to Gather",
+    creating?"Choose how you’ll use Gather.":"Choose the account you want to use in the demo.")+
+    '<div class="grid auth-grid"><section class="card auth-card"><form data-form="'+mode+'" autocomplete="off">'+
+    '<label for="auth-role">Account type</label><select id="auth-role" name="role">'+
+    selectOptions(roleOptions,state.role)+'</select>'+
+    nameField+'<label for="auth-email">Email address</label>'+
+    '<input required type="email" id="auth-email" name="email" maxlength="120" autocomplete="off" placeholder="you@example.com">'+
+    '<label for="auth-password">Demo password</label>'+
+    '<input type="password" id="auth-password" value="gather-demo" readonly autocomplete="off" aria-describedby="auth-hint">'+
+    '<p id="auth-hint" class="hint">Use fictional details. A sample password is ready to use.</p>'+
+    '<div class="actions"><button class="primary" type="submit">'+(creating?"Create demo account":"Sign in to demo")+'</button>'+
+    button("demo-details","Use demo details")+'</div></form>'+
+    '<div class="actions">'+(creating?'Already have an account?':'New to Gather?')+
+    button(creating?"signin":"signup",creating?"Sign in instead":"Create an account","text")+'</div></section>'+
+    '<aside class="card auth-aside"><h2>Choose your account type</h2>'+
+    '<h3>Planner</h3><p>Find a venue, send an enquiry and book your event.</p>'+
+    '<h3>Venue owner</h3><p>Manage your listing, reply to enquiries and see bookings on your calendar.</p>'+
+    (creating?'':'<h3>Admin</h3><p>Use the preset admin account to review pilot activity.</p>')+'</aside></div>';
+}
+function openAccount(role){
+  if(!state.signedIn[role]){
+    go(role,role==="admin" || state.accounts[role]?"signin":"signup");
+    return;
+  }
+  if(role==="admin") go(role,"admin");
+  else if(role==="venue") go(role,state.ownerPage);
+  else go(role,state.plannerPage==="checkout"?"request":state.plannerPage);
+}
+function previewRole(role){
+  if(role!=="admin") state.accounts[role] ||= demoProfiles[role];
+  state.signedIn[role]=true;
+  openAccount(role);
+}
+function visibleRequests(role){
+  return state.requests.filter(r=>role==="planner"
+    ? r.plannerEmail===state.accounts.planner?.email
+    : role==="venue" && Boolean(ownedVenue(r.venueId)));
+}
+function activeRequest(role){
+  const list=visibleRequests(role);
+  return list.includes(state.request)?state.request:list.at(-1);
+}
+function quoteOf(r){return r.versions.at(-1);}
+function quoteIsOpen(r){return ["accepted","quote-question"].includes(r?.status);}
+function showEnquiry(r,role){
+  state.request=r;
+  state.quoteMode="";
+  go(role,role==="venue"?"inbox":"request");
+}
+function steps(active){
+  return '<ol class="steps" aria-label="Booking progress">'+["Brief","Shortlist","Enquiry","Deposit"].map((item,i)=>
+    '<li'+(i===active?' aria-current="step"':'')+'>'+item+'</li>').join("")+'</ol>';
+}
+function plannerControls(){
+  const inHistory=state.page==="history" || state.page==="historyDetail";
+  return '<div class="actions planner-controls" style="margin-bottom:18px">'+
+    button("planner-work",activeRequest("planner")?"Current enquiry":"Find a venue",inHistory?"":"primary")+
+    button("quote-history","Quote history",["quotes","quoteDetail"].includes(state.page)?"primary":"")+
+    button("booking-history","Booking history",inHistory?"primary":"")+'</div>';
+}
+function plannerBrief(){
+  return steps(0)+title("Planner","Describe your event","Start in your own words. Gather will ask for the details it needs to search.")+
+    '<div class="grid">'+card('<form data-form="brief"><label for="brief">What are you planning?</label>'+
+    '<textarea required id="brief" name="brief" placeholder="Include your date, guest count, budget or must-haves.">'+clean(state.raw)+'</textarea>'+
+    '<div class="actions" style="margin-top:14px">'+submit("Continue")+button("example","Use sample brief")+'</div></form>')+
+    card('<h2>Try the sample booking</h2><p class="muted">An 80-person standing event near Shoreditch, with AV and a £6,000 budget.</p>'+
+      '<p class="hint">The prototype simulates extraction from the brief. You can edit all the resulting details.</p>')+'</div>';
+}
+function facilityField(id,label,options,selected){
+  const isAv=id==="want-av" || id==="offer-av";
+  const helpId=id+"-help";
+  const help=isAv?'<span class="av-help"><button type="button" aria-label="About AV equipment" aria-describedby="'+helpId+'">i</button>'+
+    '<span role="tooltip" id="'+helpId+'">AV covers sound and display equipment. Choose this for a general AV need. If you need a projector, microphones or a sound system, select those items individually.</span></span>':"";
+  return '<div class="field"><div class="facility-label"><label for="'+id+'">'+clean(label)+'</label>'+help+'</div>'+
+    '<select name="'+id+'" id="'+id+'">'+selectOptions(options,selected)+'</select></div>';
+}
+function facilityGroup(title,fields,count=0){
+  return '<details class="facility-group"><summary data-group-name="'+clean(title)+'">'+clean(title)+
+    '<small>'+ (count ? count+" selected" : "") +'</small></summary>'+
+    '<div class="facilities-fields">'+fields.join("")+'</div></details>';
+}
+function plannerFacilityPicker(event){
+  const count=facilitySelections(event,"essential").length+facilitySelections(event,"preferred").length;
+  const groups=facilityGroups.map(([title,items])=>facilityGroup(title,
+    items.map(([id,label])=>facilityField("want-"+id,label,preferenceLevels,event.facilities[id]||"")),
+    items.filter(([id])=>event.facilities[id]).length));
+  return '<details class="facilities" id="planner-facilities"><summary>Accessibility &amp; amenities <small id="facilities-count">'+count+' selected</small></summary>'+
+    '<div class="facilities-body"><p class="hint">Essential facilities are required for a match. Preferred facilities help rank the results.</p>'+
+    groups.join("")+'</div></details>';
+}
+function review(){
+  const e=state.event;
+  return steps(0)+title("Planner",e.date?"Check your event details":"What date are you planning for?",
+    "Confirm the details Gather will use to check availability and capacity.")+
+    '<div class="grid">'+card('<form data-form="review"><div class="two"><div><label for="date">Event date</label>'+
+      '<input required type="date" name="date" id="date" value="'+clean(e.date)+'"></div><div><label for="guests">Guests</label>'+
+      '<input required type="number" min="1" max="10000" name="guests" id="guests" value="'+clean(e.guests)+'"></div>'+
+      '<div><label for="layout">Layout</label><select id="layout" name="layout">'+
+      Object.entries(layouts).map(([value,label])=>'<option value="'+value+'"'+
+        (e.layout===value?" selected":"")+'>'+label+'</option>').join("")+'</select></div>'+
+      '<div><label for="event-type">Event type <small>(optional)</small></label><select id="event-type" name="eventType">'+
+      [["","Select event type"],...eventTypes,["other","Other event"]].map(([id,label])=>
+        '<option value="'+id+'"'+(e.type===id?' selected':'')+'>'+label+'</option>').join("")+'</select></div>'+
+      '<div><label for="area">Preferred area</label><input id="area" name="area" value="'+clean(e.area)+'"></div>'+
+      '<div><label for="budget">Budget (£)</label><input required type="number" min="0" name="budget" id="budget" value="'+clean(e.budget)+'"></div></div>'+
+      plannerFacilityPicker(e)+
+      '<div class="actions" style="margin-top:14px">'+submit("Find matching venues")+button("example-date","Use 26 March 2027")+'</div></form>')+
+      card('<h2>Your original brief</h2><p class="muted">'+clean(state.raw)+'</p>'+button("edit-brief","Edit original brief","text"))+'</div>';
+}
+function shortlist(){
+  const list=sortedByPrice(matches(),state.shortlistSort,item=>eventCost(item,state.event));
+  const results=list.map(item => card('<article class="match"><div><p class="context">'+clean(item.area)+" · "+clean(item.kind)+'</p><h2>'+clean(item.name)+
+    '</h2><p>Fits '+state.event.guests+' guests · '+layouts[state.event.layout]+' · Capacity '+item[state.event.layout]+
+    '</p><p class="hint">Available on '+dateLabel(state.event.date)+'. The owner confirms the final quote.</p>'+matchedFacilityText(item)+'</div>'+
+    '<div class="price">'+pounds(eventCost(item,state.event))+'<br><small class="muted">'+clean(item.model)+'</small></div>'+
+    venueFacilityDetails(item)+'<div class="actions">'+button("select","Review enquiry","primary",item.id)+'</div></article>')).join("");
+  const sort=list.length
+    ? '<div class="shortlist-sort"><label for="shortlist-sort">Sort venues</label><select id="shortlist-sort">'+
+      selectOptions([["match","Best match"],...priceSorts],state.shortlistSort)+'</select></div>'
+    : "";
+  return steps(1)+title("Planner",list.length?list.length+" suitable "+(list.length===1?"venue":"venues"):"No venues match this brief",
+    list.length?"These venues fit your date, capacity and essential facilities.":"Try another date or adjust your brief and search again.")+
+    '<div class="grid"><div>'+sort+(results || card(callout("No listed space fits all your requirements for that date.",true)+button("edit-details","Edit event details","primary")))+'</div>'+
+    card('<h2>Your event</h2>'+eventSummary()+button("edit-details","Edit details","text"))+'</div>';
+}
+function pricedAmenities(item){
+  return facilities.filter(([id])=>facilityStatus(item,id)==="yes" && item.amenityPrices?.[id]>0)
+    .map(([id,name])=>({id,name,amount:item.amenityPrices[id]}));
+}
+function requestedAmenityFields(item){
+  const extras=pricedAmenities(item);
+  if(!extras.length) return "";
+  return '<fieldset class="quote-services"><legend>Priced amenities</legend><p class="hint">Select extras to include in your quote request.</p>'+
+    extras.map(({id,name,amount})=>{
+      const essential=state.event.facilities[id]==="essential";
+      return '<label><input type="checkbox" name="requested-extra" value="'+clean(id)+'"'+
+        (essential?' checked disabled':'')+'> '+clean(name)+' · '+pounds(amount)+(essential?' · Essential':'')+'</label>';
+    }).join("")+'</fieldset>';
+}
+function enquire(){
+  const item=venue(state.selected);
+  return steps(2)+title("Planner","Review your enquiry",item.name+" · "+item.area)+
+     '<div class="grid">'+card('<h2>Event brief</h2>'+eventSummary()+requestedAmenityFields(item)+
+    '<div class="actions" style="margin-top:16px">'+button("send","Send enquiry","primary")+button("shortlist","Back to shortlist")+'</div>')+
+    card('<h2>Estimated price</h2><p class="price">'+pounds(eventCost(item,state.event))+'</p><p class="muted">'+clean(item.model)+
+    '. The venue confirms the final quote and deposit.</p>'+venueFacilityDetails(item))+'</div>';
+}
+const statusText={pending:"Awaiting venue reply",question:"Venue asked a question",declined:"Venue declined",
+  accepted:"Quote ready","quote-question":"Question sent","planner-declined":"Quote declined",alternative:"Alternative quote",confirmed:"Booking confirmed",unavailable:"Date unavailable"};
+function requestView(){
+  const r=activeRequest("planner");
+  if(!r) return plannerBrief();
+  const item=venue(r.venueId);
+  let content="";
+  if(r.status==="pending") content=callout("The venue has your enquiry. A response would trigger an email.")+button("shortlist","Return to shortlist");
+  if(r.status==="question") content=callout(r.message)+
+    '<form data-form="reply"><label for="reply">Your reply</label><textarea required id="reply" name="reply"></textarea>'+
+    '<div class="actions" style="margin-top:12px">'+submit("Send reply")+'</div></form>';
+  if(quoteIsOpen(r)){
+    const q=quoteOf(r);
+    content='<h2>Booking quote</h2>'+quoteMeta(q)+quoteSummary(q)+quoteNote(q)+
+      (r.status==="quote-question"?callout("Your question is with the venue."):"")+
+      '<div class="actions quote-actions">'+button("checkout","Continue to test checkout","primary")+
+      button("ask-quote","Ask about this quote")+button("decline-quote","Decline quote")+button("shortlist","Return to shortlist","text")+'</div>';
+    if(state.quoteMode==="ask" || state.quoteMode==="decline"){
+      const ask=state.quoteMode==="ask";
+      content+='<form data-form="'+(ask?"quote-question":"quote-decline")+'"><label for="quote-message">'+
+        (ask?"Your question":"Reason (optional)")+'</label><textarea id="quote-message" name="message" maxlength="600"'+
+        (ask?" required":"")+'></textarea><div class="actions quote-actions">'+
+        submit(ask?"Send question":"Confirm decline")+button("cancel-quote","Cancel","text")+'</div></form>';
+    }
+  }
+  if(r.status==="planner-declined") content=callout("You declined the quote.")+button("shortlist","Return to shortlist","primary");
+  if(["declined","unavailable","alternative"].includes(r.status)) content=callout(r.message,true)+button("shortlist","Return to shortlist","primary");
+  if(r.status==="confirmed") content=callout("Test payment verified. Both sides can see the confirmed booking.")+
+    confirmationSummary(r)+
+    '<div class="actions" style="margin-top:16px">'+button("new-brief","Plan another event","primary")+'</div>';
+  return steps(r.status==="confirmed"?3:2)+title("Planner",statusText[r.status],item.name+" · "+dateLabel(r.event.date))+
+    '<div class="grid">'+card(content+quoteConversation(r))+card('<h2>Event details</h2>'+eventSummary(r.event))+'</div>';
+}
+function quoteLines(request){
+  return row("Venue hire",pounds(request.hire))+
+    request.services.map(service => row(service.name,pounds(service.amount))).join("")+
+    row("Total quote",pounds(request.quote));
+}
+function quoteSummary(request){
+  return '<dl class="rows">'+quoteLines(request)+row("Deposit due today",pounds(request.deposit))+
+    row("Balance after deposit",pounds(remainingBalance(request)))+'</dl>';
+}
+function confirmationSummary(request){
+  return '<dl class="rows">'+quoteLines(request)+row("Deposit paid",pounds(request.deposit))+
+    row("Remaining balance",pounds(remainingBalance(request)))+row("Booking reference",request.reference)+
+    (request.bookedQuoteRef?row("Quote reference",request.bookedQuoteRef):"")+'</dl>';
+}
+function checkout(){
+  const r=activeRequest("planner");
+  if(!quoteIsOpen(r)) return requestView();
+  const q=quoteOf(r), item=venue(r.venueId);
+  return steps(3)+title("Planner","Pay your deposit","Review your booking and the amount due today.")+
+    '<div class="grid"><section class="card checkout-card"><span class="checkout-badge">Test mode · no charge</span>'+
+    '<h2>Payment method</h2><p class="hint">Use a preset test card to try checkout.</p>'+
+    '<label for="test-card">Test card</label><select id="test-card">'+
+    '<option value="success">Visa ending in 4242</option><option value="decline">Visa ending in 0002 (declined)</option></select>'+
+    '<button class="primary" type="button" data-action="pay" data-id="'+clean(q.reference)+'">Pay '+pounds(q.deposit)+' deposit</button>'+
+    '<p id="payment-error" class="hint" role="alert" hidden></p><p class="hint">This prototype simulates Stripe Checkout.</p>'+button("back-to-quote","Back to quote","text")+'</section>'+
+    '<section class="card checkout-card"><p class="context">Booking summary</p><h2>'+clean(item.name)+'</h2>'+
+    '<p class="muted">'+clean(dateLabel(r.event.date))+' · '+clean(eventTypeLabel(r.event.type))+'</p>'+
+    '<dl class="rows">'+row("Booked by",r.booker)+row("Guests",r.event.guests)+
+    row("Layout",layouts[r.event.layout])+row("Quote reference",q.reference)+quoteLines(q)+
+    row("Balance after deposit",pounds(remainingBalance(q)))+'</dl>'+
+    '<div class="checkout-total"><span>Due today</span><strong>'+pounds(q.deposit)+'</strong></div></section></div>';
+}
+function ownerControls(active){
+  return '<div class="actions" style="margin-bottom:18px">'+button("owner-listing","Manage listings",active==="listing"?"primary":"")+
+    button("owner-inbox","Enquiries",active==="inbox"?"primary":"")+
+    button("owner-calendar","Calendar",active==="calendar"?"primary":"")+
+    button("quote-history","Quote history",active==="quotes"?"primary":"")+
+    button("booking-history","Booking history",active==="history"?"primary":"")+'</div>';
+}
+function ownerListing(){
+  const listings=ownedVenues().map(item=>
+    '<section class="card" data-action="edit-listing" data-id="'+clean(item.id)+'"><p class="chip'+(item.published?'':' listing-draft')+'">'+(item.published?"Published":"Draft")+'</p>'+
+    '<h2>'+clean(item.name)+'</h2><p class="muted">'+clean(item.area+" · "+item.kind)+'</p>'+
+    '<dl class="rows">'+row(item.model,pounds(item.price))+row("Standing capacity",item.standing)+
+    row("Seated capacity",item.seated)+'</dl><div class="actions">'+
+    button("edit-listing","Edit "+item.name,"primary",item.id)+'</div></section>'
+  ).join("");
+  return ownerControls("listing")+title("Venue owner","Manage listings","Open a listing to edit its details, pricing and availability.")+
+    (listings?'<div class="listing-grid">'+listings+'</div>':card('<h2>No listings yet</h2><p class="muted">Listings linked to your account will appear here.</p>'));
+}
+function matchedFacilityText(item){
+  const labels=facilities.filter(([id])=>state.event.facilities[id] && facilityStatus(item,id)==="yes").map(([,label])=>label);
+  return labels.length?'<p class="hint facility-matches">'+clean(labels.join(" · "))+'</p>':"";
+}
+function venueFacilityRows(item){
+  const known=toiletTypes.filter(([id])=>item.toilets[id]!==null);
+  const total=known.reduce((sum,[id])=>sum+item.toilets[id],0);
+  const breakdown=known.map(([id,label])=>row(label,item.toilets[id])).join("");
+  const cubicles=known.length===toiletTypes.length?row("Total guest cubicles",total):"";
+  const accessible=item.toilets.accessible===null?"Not confirmed":item.toilets.accessible;
+  const notes=item.accessNotes?'<p class="hint facility-notes">'+clean(item.accessNotes)+'</p>':"";
+  return facilityGroups.map(([title,items])=>{
+    const rows=items.map(([id,label])=>{
+      if(id==="toilets") return row(label,availabilityLabels[facilityStatus(item,id)])+cubicles+breakdown;
+      if(id==="accessibleToilet") return row("Wheelchair-accessible cubicles",accessible);
+      const status=facilityStatus(item,id);
+      const price=item.amenityPrices?.[id];
+      return row(label,availabilityLabels[status]+(status==="yes" && price>0?" · "+pounds(price)+" per event":""));
+    }).join("");
+    return '<h3 class="facility-category">'+clean(title)+'</h3><dl class="rows">'+rows+'</dl>'+
+      (title==="Accessibility"?notes:"");
+  }).join("")+(item.equipmentNotes?'<p class="hint facility-notes">'+clean(item.equipmentNotes)+'</p>':"");
+}
+function venueFacilityDetails(item){
+  return '<details class="facilities facilities-result"><summary>Facilities &amp; accessibility</summary>'+
+    '<div class="facilities-body">'+venueFacilityRows(item)+'</div></details>';
+}
+function ownerAmenityField(item,id,label,statuses,priceable){
+  const status=facilityStatus(item,id);
+  const availability=facilityField("offer-"+id,label,statuses,status);
+  if(!priceable) return availability;
+  return availability.slice(0,-6)+'<div class="amenity-price" id="amenity-price-'+id+'"'+(status==="yes"?"":" hidden")+'>'+
+    '<label for="charge-'+id+'">'+clean(label)+' extra (£ per event)</label>'+
+    '<input id="charge-'+id+'" name="charge-'+id+'" type="number" min="0" max="1000000" step="0.01"'+
+    (status==="yes"?"":" disabled")+' value="'+(item.amenityPrices?.[id]??"")+'" placeholder="Leave blank if included"></div></div>';
+}
+function ownerFacilityEditor(item){
+  const statuses=Object.entries(availabilityLabels);
+  const groups=facilityGroups.map(([title,items])=>facilityGroup(title,
+    items.filter(([id])=>id!=="toilets" && id!=="accessibleToilet").map(([id,label])=>
+      ownerAmenityField(item,id,label,statuses,title!=="Accessibility"))));
+  const counts=toiletFields.map(([id,label])=>'<div class="field"><label for="cubicles-'+id+'">'+clean(label)+'</label>'+
+    '<input id="cubicles-'+id+'" name="cubicles-'+id+'" type="number" min="0" max="999" step="1" value="'+(item.toilets[id]??"")+'"></div>');
+  return '<details class="facilities" id="owner-facilities"><summary>Facilities &amp; accessibility</summary><div class="facilities-body">'+
+    groups.join("")+
+    '<fieldset><legend>Toilets</legend><p class="hint">Enter 0 for none or leave blank if unknown. Include accessible cubicles in the relevant women’s, men’s or shared count.</p>'+
+    '<div class="facilities-fields">'+counts.join("")+'</div></fieldset>'+
+    '<div class="field facility-notes"><label for="access-notes">Accessibility notes</label>'+
+    '<textarea id="access-notes" name="access-notes" maxlength="400" placeholder="Describe the entrance, route to the event space and accessible toilet, and any ramps or lifts.">'+clean(item.accessNotes)+'</textarea></div>'+
+    '<div class="field facility-notes"><label for="equipment-notes">Furniture and equipment notes</label>'+
+    '<textarea id="equipment-notes" name="equipment-notes" maxlength="400" placeholder="Add quantities, what’s included and any extra charges.">'+clean(item.equipmentNotes)+'</textarea></div>'+
+    '</div></details>';
+}
+function ownerListingEdit(){
+  const item=ownedVenue(state.ownerListingId);
+  if(!item) return ownerListing();
+  return ownerControls("listing")+title("Venue owner","Edit "+item.name,item.area+" · "+item.kind)+
+    '<div class="grid">'+card('<form data-form="listing"><label for="venue-name">Space name</label>'+
+      '<input required id="venue-name" name="name" maxlength="80" value="'+clean(item.name)+'">'+
+      '<div class="two"><div><label for="venue-area">Area</label><input required id="venue-area" name="area" maxlength="60" value="'+clean(item.area)+'"></div>'+
+      '<div><label for="venue-kind">Venue type</label><input required id="venue-kind" name="kind" maxlength="60" value="'+clean(item.kind)+'"></div>'+
+      '<div><label for="standing">Standing capacity</label><input required type="number" min="1" id="standing" name="standing" value="'+item.standing+'"></div>'+
+      '<div><label for="seated">Seated capacity</label><input required type="number" min="1" id="seated" name="seated" value="'+item.seated+'"></div>'+
+      '<div><label for="mixed">Mixed capacity</label><input type="number" min="1" id="mixed" name="mixed" aria-describedby="mixed-help" value="'+(item.mixed??"")+'">'+
+      '<p class="hint" id="mixed-help">Total guests with standing and seating together. Leave blank if unavailable.</p></div>'+
+      '<div><label for="price">Price (£)</label><input required type="number" min="0" step="0.01" id="price" name="price" value="'+item.price+'"></div>'+
+      '<div><label for="model">Pricing model</label><select id="model" name="model">'+["Hire fee","Minimum spend","Per head"].map(m=>
+      '<option'+(m===item.model?' selected':'')+'>'+m+'</option>').join("")+'</select></div></div>'+
+      ownerFacilityEditor(item)+
+      '<label><input type="checkbox" name="published" aria-describedby="publish-help" '+(item.published?'checked':'')+'> Show listing in planner searches</label>'+
+      '<p class="hint" id="publish-help">Click Save listing to apply. Untick to keep the listing in your dashboard only.</p>'+
+      '<div class="actions" style="margin-top:15px">'+submit("Save listing")+'</div></form>')+
+    card('<h2>Availability</h2><p class="muted">'+dateLabel(demoDate)+'</p>'+
+      '<p class="chip">'+(booked(item.id,demoDate)?"Booked":item.blocked.includes(demoDate)?"Unavailable":"Available")+'</p><div class="actions">'+
+      (booked(item.id,demoDate)?"":button("toggle-date",item.blocked.includes(demoDate)?"Reopen sample date":"Block sample date"))+
+      button("owner-calendar","View calendar","",item.id)+'</div>')+'</div>'+
+    '<div class="listing-back">'+button("owner-listing","Back to listings","text")+'</div>';
+}
+function calendarEntries(){
+  const item = calendarVenue();
+  if(!item) return [];
+  const entries = sampleCalendar.filter(entry => entry.venueId===item.id);
+  for(const booking of state.bookings.filter(entry=>entry.venueId===item.id)){
+    entries.push({
+      id:booking.id, date:booking.event.date, status:"confirmed", title:"Planner booking",
+      booker:booking.booker,eventType:booking.event.type,colour:"blue",
+      guests:booking.event.guests,layout:booking.event.layout,brief:booking.brief
+    });
+  }
+  for(const request of visibleRequests("venue").filter(r=>r.venueId===item.id && ["pending","question","accepted","quote-question"].includes(r.status))){
+    entries.push({
+      id:request.id, date:request.event.date, status:request.status,
+      title:"Planner enquiry",booker:request.booker,eventType:request.event.type,
+      colour:{pending:"amber",question:"amber",accepted:"blue","quote-question":"amber"}[request.status],
+      guests:request.event.guests,layout:request.event.layout,brief:request.brief
+    });
+  }
+  for (const date of item.blocked) {
+    if (!entries.some(entry => entry.date===date && entry.status==="confirmed")) {
+      entries.push({id:"blocked-"+date,date,title:"Manually blocked",status:"blocked",colour:"grey"});
+    }
+  }
+  return entries;
+}
+function calendarStatus(entry){
+  return {confirmed:"Confirmed booking",pending:"Awaiting venue reply",question:"Awaiting planner reply",
+    accepted:"Quote sent · deposit pending","quote-question":"Planner asked about the quote",blocked:"Unavailable"}[entry.status];
+}
+function calendarSummary(entry){
+  return entry.guests ? entry.guests+" guests · "+layouts[entry.layout] : "Blocked by the venue owner";
+}
+function calendarEvent(entry){
+  const summary = calendarSummary(entry);
+  const status = calendarStatus(entry);
+  const label = entry.booker || entry.title;
+  return '<div class="calendar-entry"><button class="calendar-event event-'+entry.colour+
+    '" type="button" data-action="calendar-event" data-id="'+clean(entry.id)+'" aria-label="'+
+    clean(label+", "+entry.title+", "+dateLabel(entry.date)+", "+status+", "+summary)+'" aria-describedby="event-'+clean(entry.id)+'">'+
+    '<span class="calendar-event-label">'+clean(label)+'</span></button>'+
+    '<span class="calendar-tooltip" id="event-'+clean(entry.id)+'" role="tooltip"><strong>'+clean(label)+'</strong>'+(entry.booker?'<span>'+clean(entry.title+(entry.eventType?" · "+eventTypeLabel(entry.eventType):""))+'</span>':"")+
+    '<span>'+clean(dateLabel(entry.date))+'</span><span>'+clean(summary)+'</span><span>'+clean(status)+'</span>'+
+    (entry.brief?'<span>'+clean(entry.brief.length>105?entry.brief.slice(0,102)+'…':entry.brief)+'</span>':'')+'</span></div>';
+}
+function ownerCalendar(){
+  const current=calendarVenue();
+  if(!current) return ownerControls("calendar")+title("Venue owner","Booking calendar")+
+    card('<h2>No venues to show</h2><p class="muted">Your venues will appear here once they’re linked to your account.</p>');
+  const [year, month] = state.calendarMonth.split("-").map(Number);
+  const first = new Date(Date.UTC(year,month-1,1));
+  const offset = (first.getUTCDay()+6)%7;
+  const lastDay = new Date(Date.UTC(year,month,0)).getUTCDate();
+  const monthLabel = first.toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"});
+  const entries = calendarEntries();
+  const cells = [];
+  for (const day of ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]) cells.push('<div class="calendar-weekday">'+day+'</div>');
+  const total = Math.ceil((offset+lastDay)/7)*7;
+  for (let cell=0; cell<total; cell++) {
+    const day = cell-offset+1;
+    if (day<1 || day>lastDay) {
+      cells.push('<div class="calendar-outside" aria-hidden="true"></div>');
+      continue;
+    }
+    const iso = state.calendarMonth+"-"+String(day).padStart(2,"0");
+    const events = entries.filter(entry => entry.date===iso).map(calendarEvent).join("");
+    cells.push('<div class="calendar-day"><span class="calendar-number">'+day+'</span>'+events+'</div>');
+  }
+  const options=selectOptions(ownedVenues().map(item=>[item.id,item.name]),current.id);
+  const controls = '<div class="calendar-toolbar"><h2>'+monthLabel+'</h2><div class="actions">'+
+    button("calendar-prev","Previous month")+button("calendar-next","Next month")+
+    '</div><div><label for="calendar-venue">Demo venue</label><select id="calendar-venue">'+options+'</select></div></div>';
+  const legend = '<ul class="calendar-legend"><li><span class="dot event-green"></span><span class="dot event-purple"></span>Sample bookings</li>'+
+    '<li><span class="dot event-blue"></span>Planner quote or booking</li><li><span class="dot event-amber"></span>Open enquiry</li>'+
+    '<li><span class="dot event-grey"></span>Manually blocked</li></ul>';
+  return ownerControls("calendar")+title("Venue owner","Booking calendar",
+    "Hover over or focus an event for a quick summary. Select it to open the details.")+
+    '<section class="card calendar">'+controls+legend+'<div class="calendar-grid" aria-label="'+monthLabel+' booking calendar">'+
+    cells.join("")+'</div></section>';
+}
+function calendarDetail(){
+  const entry = calendarEntries().find(item => item.id===state.calendarEntryId);
+  if (!entry) return ownerCalendar();
+  const item = calendarVenue();
+  return ownerControls("calendar")+title("Venue owner",entry.title,item.name+" · "+dateLabel(entry.date))+
+    '<div class="narrow">'+card('<p class="chip">'+clean(calendarStatus(entry))+'</p>'+
+    (entry.booker?'<dl class="rows">'+row("Booked by",entry.booker)+
+    row("Event type",eventTypeLabel(entry.eventType))+'</dl>':'')+
+    '<p>'+clean(calendarSummary(entry))+'</p>'+(entry.brief?'<h3>Sample event brief</h3><p>'+clean(entry.brief)+'</p>':'')+
+    button("owner-calendar","Back to calendar"))+'</div>';
+}
+function optionalServiceFields(service={}){
+  return '<div class="quote-service">'+
+    '<label>Service name<input name="service-name" maxlength="80" placeholder="e.g. Room setup" value="'+clean(service.name)+'"></label>'+
+    '<label>Service cost (£)<input name="service-cost" type="number" min="0.01" step="0.01" max="1000000" placeholder="250" value="'+clean(service.amount)+'"></label>'+
+    '<button type="button" data-action="remove-service">Remove</button></div>';
+}
+function updateQuoteTotal(form){
+  const data = new FormData(form);
+  const costs = data.getAll("service-cost").reduce((total,cost) => total + pence(cost), 0);
+  byId("quote-total").textContent = pounds((pence(data.get("hire")) + costs) / 100);
+}
+function readOptionalServices(form){
+  const services=[];
+  for(const item of form.querySelectorAll(".quote-service")){
+    const nameField=item.querySelector('[name="service-name"]');
+    const costField=item.querySelector('[name="service-cost"]');
+    const name=nameField.value.trim();
+    const cost=costField.value;
+    if(!name && !cost) continue;
+    if(!name || !cost){
+      const missing=name ? costField : nameField;
+      missing.setCustomValidity(name ? "Enter a price for this service." : "Enter a name for this service.");
+      missing.reportValidity();
+      return null;
+    }
+    services.push({name,amount:Number(cost)});
+  }
+  return services;
+}
+function quoteMeta(q){return '<p class="quote-meta">'+clean(q.reference)+' · Revision '+q.revision+'</p>';}
+function quoteNote(q){return q.note?'<p class="hint">'+clean(q.note)+'</p>':"";}
+function quoteConversation(r){
+  if(!r.conversation.length) return "";
+  return '<h3 class="quote-actions">Quote conversation</h3><ul class="quote-log">'+r.conversation.map(entry=>
+    '<li><strong>'+clean(entry.from)+' · '+clean(entry.reference)+'</strong><br>'+clean(entry.message)+'</li>'
+  ).join("")+'</ul>';
+}
+function venueQuoteForm(r,item){
+  const previous=quoteOf(r);
+  const hire=previous?.hire??eventCost(item,r.event);
+  const deposit=previous?.deposit??Math.round(hire*.2);
+  const services=previous?.services??r.requestedExtras;
+  const total=(pence(hire)+services.reduce((sum,service)=>sum+pence(service.amount),0))/100;
+  const extras=pricedAmenities(item);
+  return '<form data-form="venue-response">'+(r.plannerReply?callout("Planner reply: "+r.plannerReply):"")+
+    '<div class="two"><div><label for="hire">Venue hire (£)</label><input type="number" required min="0.01" step="0.01" id="hire" name="hire" value="'+hire+'"></div>'+
+    '<div><label for="deposit">Deposit (£)</label><input type="number" required min="0.01" step="0.01" id="deposit" name="deposit" value="'+deposit+'"></div></div>'+
+    '<fieldset class="quote-services"><legend>Amenity and service charges</legend><div id="quote-services">'+
+    services.map(optionalServiceFields).join("")+'</div>'+button("add-service","Add a service")+
+    (extras.length?'<label for="listed-extra">Priced amenities from listing</label><div class="actions"><select id="listed-extra">'+
+      selectOptions([["","Choose an amenity"],...extras.map(extra=>[extra.id,extra.name+" · "+pounds(extra.amount)])],"")+
+      '</select>'+button("add-listed-extra","Add listed amenity")+'</div>':"")+'</fieldset>'+
+    '<div class="checkout-total"><span>Total quote</span><output id="quote-total" for="hire">'+pounds(total)+'</output></div>'+
+    '<label for="message">Note to planner'+(previous?"":" or question")+'</label><textarea id="message" name="message" maxlength="600"></textarea>'+
+    '<div class="actions quote-actions"><button class="primary" name="decision" value="accept" type="button" data-submit>'+
+      (previous?"Send revised quote":"Accept and send quote")+'</button>'+
+    (previous?button("cancel-quote","Cancel","text"):
+      '<button name="decision" value="question" type="button" data-submit data-skip-validation>Ask a question</button>'+
+      '<button name="decision" value="decline" type="button" data-submit data-skip-validation>Decline</button>')+'</div></form>';
+}
+function ownerInbox(){
+  const r=activeRequest("venue");
+  const enquiries=visibleRequests("venue");
+  const list=enquiries.length>1?'<div class="actions quote-actions">'+enquiries.map(entry=>
+    button("open-enquiry",venue(entry.venueId).name+" · "+entry.booker+" · "+dateLabel(entry.event.date)+" · "+entry.id,
+      entry===r?"primary":"",entry.id)
+  ).join("")+'</div>':"";
+  let content=card('<h2>No enquiries yet</h2><p class="muted">New planner enquiries will appear here.</p>');
+  if(r){
+    const item=ownedVenue(r.venueId), q=quoteOf(r);
+    let response="";
+    if(r.status==="pending" || state.quoteMode==="edit") response=venueQuoteForm(r,item);
+    else if(r.status==="question") response=callout("Waiting for the planner to answer: "+r.message);
+    else if(quoteIsOpen(r) || r.status==="planner-declined"){
+      response=quoteMeta(q)+quoteSummary(q)+quoteNote(q)+
+        (r.status==="planner-declined"?callout("The planner declined this quote."):"")+
+        '<div class="actions quote-actions">'+button("edit-quote","Amend quote","primary")+'</div>'+
+        (r.status==="quote-question"?'<form data-form="quote-answer"><label for="quote-answer">Reply to the planner</label>'+
+          '<textarea id="quote-answer" name="message" required maxlength="600"></textarea>'+
+          '<div class="actions quote-actions">'+submit("Send reply")+'</div></form>':"");
+    }else if(r.status==="confirmed") response=callout("Test deposit verified. The booked date is now unavailable.")+confirmationSummary(r);
+    else response=callout(r.message,true);
+    content='<div class="grid">'+card('<p class="chip">'+clean(statusText[r.status])+'</p><h2>'+clean(item.name)+'</h2>'+
+      '<p class="muted">Enquiry from '+clean(r.booker)+'</p>'+response+quoteConversation(r))+
+      card('<h2>Planner brief</h2>'+eventSummary(r.event)+
+        (r.requestedExtras.length?'<h3>Requested priced amenities</h3><dl class="rows">'+
+          r.requestedExtras.map(extra=>row(extra.name,pounds(extra.amount))).join("")+'</dl>':"")+
+        (r.brief?'<h3 style="margin-top:16px">Original request</h3><p class="muted">'+clean(r.brief)+'</p>':""))+'</div>';
+  }
+  return ownerControls("inbox")+title("Venue owner","Enquiries","Review requests, send quotes and manage bookings.")+
+    list+'<div style="margin-top:24px">'+content+'</div>';
+}
+function quoteRecords(role){
+  return visibleRequests(role).flatMap(r=>r.versions.map(q=>({r,q})));
+}
+function quoteStatus(r,q){
+  if(r.bookedQuoteRef===q.reference) return "Booked";
+  if(q!==quoteOf(r)) return "Superseded";
+  if(r.status==="declined" || r.status==="planner-declined") return "Declined";
+  if(r.status==="unavailable") return "Date unavailable";
+  if(r.status==="alternative") return "Alternative quote";
+  return r.status==="quote-question"?"Question sent":"Quote ready";
+}
+function canRemoveQuote(r,q){
+  const booked=state.bookings.some(b=>b.venueId===r.venueId && b.plannerEmail===r.plannerEmail && b.event.date===r.event.date);
+  return booked && q.reference!==r.bookedQuoteRef;
+}
+function quoteHistory(){
+  const role=state.role;
+  const query=state.quoteLookup[role], term=query.toLowerCase().trim();
+  const records=quoteRecords(role).reverse().filter(({r,q})=>
+    (state.showRemoved[role] || !q.removed[role]) &&
+    (!term || (q.reference+" "+venue(r.venueId).name).toLowerCase().includes(term)));
+  const cards=records.map(({r,q})=>card('<p class="chip">'+quoteStatus(r,q)+(q.removed[role]?" · Removed":"")+
+    '</p><h2>'+clean(venue(r.venueId).name)+'</h2>'+quoteMeta(q)+'<p class="muted">'+clean(dateLabel(r.event.date))+'</p>'+
+    '<dl class="rows">'+row("Quote total",pounds(q.quote))+row("Deposit",pounds(q.deposit))+'</dl>'+
+    '<div class="actions quote-actions">'+button("view-quote","View "+q.reference,"",q.reference)+'</div>')).join("");
+  return (role==="venue"?ownerControls("quotes"):"")+title(accountLabels[role],"Quote history","Look up a quote by reference or venue and compare revisions.")+
+    '<form data-form="quote-search" class="quote-search"><label for="quote-search">Reference or venue name</label>'+
+    '<input id="quote-search" type="search" name="query" value="'+clean(query)+'" placeholder="e.g. GQ-001-02">'+
+    '<div class="actions quote-actions"><button type="submit">Search quotes</button>'+button("clear-quote-search","Clear","text")+'</div>'+
+    '<label><input type="checkbox" id="show-removed"'+(state.showRemoved[role]?" checked":"")+'> Show removed quotes</label></form>'+
+    (cards?'<div class="history-list">'+cards+'</div>':card('<h2>No quotes to show</h2><p class="muted">Sent quotes appear here. Try another reference or venue name.</p>'));
+}
+function quoteDetail(){
+  const role=state.role;
+  const record=quoteRecords(role).find(({q})=>q.reference===state.quoteRef[role] && (state.showRemoved[role] || !q.removed[role]));
+  if(!record) return quoteHistory();
+  const {r,q}=record;
+  const canOpen=q===quoteOf(r) && !q.removed[role];
+  return (role==="venue"?ownerControls("quotes"):"")+title(accountLabels[role],q.reference,venue(r.venueId).name+" · "+dateLabel(r.event.date))+
+    '<div class="grid">'+card('<p class="chip">'+quoteStatus(r,q)+'</p>'+quoteMeta(q)+quoteSummary(q)+quoteNote(q)+
+    (q.removed[role]?'<p class="hint">Removed from your quote history.</p>':"")+
+    '<div class="actions quote-actions">'+button("quote-history","Back to quote history","text")+
+    (canOpen?button("open-enquiry","Open enquiry","",r.id):"")+
+    (canRemoveQuote(r,q)?button("toggle-quote-removal",q.removed[role]?"Restore to my history":"Remove from my history","",q.reference):"")+'</div>')+
+    card('<h2>Event details</h2>'+eventSummary(r.event))+'</div>';
+}
+function bookingRecords(role){
+  const samples=sampleCalendar.filter(entry=>entry.status==="confirmed").map(entry=>({
+    id:entry.id,venueId:entry.venueId,title:entry.title,booker:entry.booker,plannerEmail:entry.plannerEmail,
+    event:{date:entry.date,type:entry.eventType,guests:entry.guests,layout:entry.layout},
+    brief:entry.brief,hire:entry.quote,services:[],quote:entry.quote,deposit:entry.deposit,reference:entry.reference
+  }));
+  const records=[...samples,...state.bookings];
+  if(role==="planner") return records.filter(entry=>entry.plannerEmail===state.accounts.planner?.email);
+  const ids=new Set(ownedVenues().map(item=>item.id));
+  return records.filter(entry=>ids.has(entry.venueId));
+}
+function historyView(){
+  const owner=state.role==="venue";
+  const sort=state.historySort[state.role];
+  let bookings=bookingRecords(state.role);
+  if(owner && state.historyVenue) bookings=bookings.filter(entry=>entry.venueId===state.historyVenue);
+  if(sort.startsWith("price")) sortedByPrice(bookings,sort,entry=>entry.quote);
+  else bookings.sort((a,b)=>sort==="date-asc"?a.event.date.localeCompare(b.event.date):b.event.date.localeCompare(a.event.date));
+  const filter=owner?'<div><label for="history-venue">Venue</label><select id="history-venue">'+
+    selectOptions([["","All venues"],...ownedVenues().map(item=>[item.id,item.name])],state.historyVenue)+'</select></div>':"";
+  const controls='<div class="history-filters">'+filter+
+    '<div><label for="history-sort">Sort bookings</label><select id="history-sort">'+selectOptions(historySorts,sort)+'</select></div></div>';
+  const cards=bookings.map(booking=>card('<p class="context">'+clean(dateLabel(booking.event.date))+'</p>'+
+    '<h2>'+clean(booking.title || (booking.event.type?eventTypeLabel(booking.event.type):"Venue booking"))+'</h2>'+
+    '<p class="muted">'+clean(booking.venueName || venue(booking.venueId).name)+(owner?' · '+clean(booking.booker):'')+'</p>'+
+    '<dl class="rows">'+row("Total",pounds(booking.quote))+row("Deposit paid",pounds(booking.deposit))+'</dl>'+
+    '<div class="actions">'+button("booking-detail","View booking","",booking.id)+'</div>')).join("");
+  return (owner?ownerControls("history"):"")+
+    title(accountLabels[state.role],"Booking history",owner?"Review confirmed bookings across your venues.":"Review your confirmed bookings and deposits.")+
+    controls+'<p class="hint" role="status">'+bookings.length+' '+(bookings.length===1?'booking':'bookings')+'</p>'+
+    (cards?'<div class="history-list">'+cards+'</div>':card('<h2>No confirmed bookings yet</h2><p class="muted">'+
+      (owner && state.historyVenue?'Choose another venue to see its bookings.':'Confirmed bookings will appear here after the deposit is paid.')+'</p>'));
+}
+function bookingDetail(){
+  const selection=state.historySelection[state.role];
+  const booking=bookingRecords(state.role).find(entry=>entry.id===selection?.id);
+  if(!booking) return historyView();
+  const owner=state.role==="venue";
+  const back=selection.fromCalendar
+    ? button("owner-calendar","Back to calendar")
+    : button("booking-history","Back to booking history");
+  return (owner?ownerControls(selection.fromCalendar?"calendar":"history"):"")+
+    title(accountLabels[state.role],booking.title || "Booking details",
+      (booking.venueName || venue(booking.venueId).name)+" · "+dateLabel(booking.event.date))+
+    '<div class="grid history-detail">'+card('<h2>Payment summary</h2>'+confirmationSummary(booking)+
+      '<div class="actions">'+back+'</div>')+
+    card('<h2>Event details</h2><dl class="rows">'+row("Booked by",booking.booker)+
+      row("Event type",eventTypeLabel(booking.event.type))+row("Guests",booking.event.guests)+row("Layout",layouts[booking.event.layout])+
+      '</dl>'+(booking.brief?'<p class="muted" style="margin-top:16px">'+clean(booking.brief)+'</p>':""))+'</div>';
+}
+const hoursSince = (end,start) => (end-start)/3600000;
+const pilotTime = Date.now();
+const daysAgo = days => pilotTime-days*86400000;
+const pilotSignUps = Array.from({length:15},(_,i)=>({
+  role:i%3===0?"venue":"planner",at:daysAgo(i+1)
+}));
+const pilotVenues = [
+  {name:"Juniper Hall",area:"Hackney",published:true},
+  {name:"Canal Room",area:"Islington",published:true},
+  {name:"Northlight Studio",area:"Camden",published:true},
+  {name:"Orchard Room",area:"Southwark",published:false,missing:"Confirm prices and publish"},
+  {name:"Foundry Annex",area:"Tower Hamlets",published:false,missing:"Add capacity and publish"}
+];
+const pilotBriefs = Array.from({length:14},(_,i)=>{
+  const eventTypes=["corporate","birthday","town-hall","wedding","private"];
+  const areas=["Hackney","Islington","Camden","Southwark"];
+  return {
+    at:daysAgo(1+i*1.6),searchedAt:daysAgo(1+i*1.6),
+    type:eventTypes[i%eventTypes.length],area:areas[i%areas.length],
+    matches:[3,2,1,4,0,3,0,2,1,4,0,2,3,null][i]
+  };
+});
+const pilotEnquiries = [0,1,2,3,5,7,8,9,11].map((briefIndex,index)=>{
+  const requestedAt=pilotBriefs[briefIndex].at+900000;
+  const venue=pilotVenues[index%3];
+  const noReply=index===2 || index===6;
+  return {id:"S"+String(index+1).padStart(2,"0"),venueName:venue.name,requestedAt,
+    firstReplyAt:noReply?null:requestedAt+(2+index*3)*3600000,
+    quoted:!noReply && index!==4};
+});
+const pilotBookings = [0,3,5,7].map((enquiryIndex,index)=>{
+  const enquiry=pilotEnquiries[enquiryIndex];
+  const totals=[3200,4200,2650,5100];
+  return {reference:"GTH-P10"+(index+1),venueName:enquiry.venueName,event:{date:"2027-03-"+(10+index*4)},
+    quote:totals[index],deposit:totals[index]/5,confirmedAt:enquiry.firstReplyAt+10800000,
+    pilotEnquiryId:enquiry.id};
+});
+const adminPeriods=[["7","Last 7 days"],["30","Last 30 days"],["all","All time"]];
+const countLabel = (count,singular,plural=singular+"s") => count+" "+(count===1?singular:plural);
+function activityDate(at){
+  return at?new Date(at).toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"Europe/London"}):"Date unavailable";
+}
+function durationLabel(hours){
+  if(hours==null || !Number.isFinite(hours)) return "—";
+  if(hours<1) return Math.max(0,Math.round(hours*60))+" min";
+  if(hours<24) return Math.round(hours)+" hr";
+  return (hours/24).toFixed(1)+" days";
+}
+function adminTable(label,headings,rows,empty){
+  if(!rows.length) return '<p class="admin-empty">'+clean(empty)+'</p>';
+  const cells=(values,tag)=>values.map(value=>"<"+tag+(tag==="th"?' scope="col"':"")+">"+clean(value)+"</"+tag+">").join("");
+  return '<div class="admin-table-wrap" role="region" aria-label="'+clean(label)+'" tabindex="0">'+
+    '<table class="admin-table" aria-label="'+clean(label)+'"><thead><tr>'+cells(headings,"th")+'</tr></thead>'+
+    '<tbody>'+rows.map(row=>"<tr>"+cells(row,"td")+"</tr>").join("")+"</tbody></table></div>";
+}
+function adminTotals(rows){
+  return '<dl class="admin-totals">'+rows.map(([label,value])=>"<div><dt>"+clean(label)+"</dt><dd>"+clean(value)+"</dd></div>").join("")+"</dl>";
+}
+function adminPanel(id,label,summary,content){
+  return '<details class="admin-panel" data-panel="'+id+'"'+(state.adminOpen.includes(id)?" open":"")+'>'+
+    '<summary><strong class="admin-summary-label">'+clean(label)+'</strong><span class="admin-summary-value">'+clean(summary)+
+    '</span></summary><div class="admin-detail">'+content+"</div></details>";
+}
+function admin(){
+  const now=Date.now();
+  const inRange=at=>state.adminPeriod==="all" || (Number.isFinite(at) && at>=now-Number(state.adminPeriod)*86400000);
+  const newest=(rows,key)=>rows.slice().sort((a,b)=>(b[key]||0)-(a[key]||0));
+  const signUps=newest([...pilotSignUps,...state.adminSignUps].filter(entry=>inRange(entry.at)),"at");
+  const briefs=newest([...pilotBriefs,...state.adminBriefs].filter(entry=>inRange(entry.at)),"at");
+  const searched=briefs.filter(entry=>entry.matches!=null);
+  const matched=searched.filter(entry=>entry.matches>0);
+  const noMatches=searched.filter(entry=>entry.matches===0);
+  const signedPlanners=signUps.filter(entry=>entry.role==="planner").length;
+  const enquiries=[...pilotEnquiries,...state.requests.map(r=>({
+    id:r.id,venueName:venue(r.venueId)?.name || "Venue unavailable",
+    requestedAt:r.requestedAt,firstReplyAt:r.firstReplyAt,
+    quoted:r.versions.length>0,waiting:!r.firstReplyAt && r.status==="pending",confirmed:r.status==="confirmed"
+  }))].filter(entry=>inRange(entry.requestedAt));
+  const awaiting=enquiries.filter(entry=>entry.waiting ?? !entry.firstReplyAt)
+    .sort((a,b)=>(a.requestedAt||Infinity)-(b.requestedAt||Infinity));
+  const quoted=enquiries.filter(entry=>entry.quoted);
+  const replies=enquiries.filter(entry=>entry.firstReplyAt && entry.requestedAt)
+    .map(entry=>hoursSince(entry.firstReplyAt,entry.requestedAt)).sort((a,b)=>a-b);
+  const middle=Math.floor(replies.length/2);
+  const median=replies.length?(replies.length%2?replies[middle]:(replies[middle-1]+replies[middle])/2):null;
+  const bookings=newest([...pilotBookings,...state.bookings].filter(entry=>inRange(entry.confirmedAt)),"confirmedAt");
+  const converted=enquiries.filter(entry=>entry.confirmed || pilotBookings.some(booking=>booking.pilotEnquiryId===entry.id)).length;
+  const confirms=enquiries.length?Math.round(converted/enquiries.length*100)+"%":"—";
+  const listings=[...pilotVenues,...state.venues.map(item=>({
+    name:item.name,area:item.area,published:item.published,
+    missing:!item.published?"Review listing and publish":""
+  }))];
+  const drafts=listings.filter(item=>!item.published);
+  const live=listings.length-drafts.length;
+  const briefRows=list=>list.map(item=>[activityDate(item.at),eventTypeLabel(item.type),item.area || "Any London area",
+    item.matches==null?"Awaiting search":countLabel(item.matches,"venue")]);
+  const briefHeadings=["Submitted","Event type","Area","Shortlist"];
+  const totalBookingValue=bookings.reduce((sum,item)=>sum+pence(item.quote),0)/100;
+  const totalDeposits=bookings.reduce((sum,item)=>sum+pence(item.deposit),0)/100;
+
+  return title("Admin","Pilot activity","See whether venue supply is ready, where enquiries stall and how many bookings Gather brings in.")+
+    '<div class="admin-toolbar"><p class="hint">Sample pilot data and activity from this browser. Payments are simulated.</p>'+
+    '<div><label for="admin-period">Activity period</label><select id="admin-period">'+selectOptions(adminPeriods,state.adminPeriod)+
+    '</select></div></div><div class="admin-panels">'+
+    adminPanel("signups","Sign-ups",countLabel(signUps.length,"account"),
+      adminTotals([["Planner accounts",signedPlanners],["Venue owner accounts",signUps.length-signedPlanners]])+
+      adminTable("Recent sign-ups",["Date","Account type"],signUps.slice(0,8).map(entry=>[activityDate(entry.at),accountLabels[entry.role]]),"No sign-ups in this period."))+
+    adminPanel("briefs","Planner briefs",countLabel(briefs.length,"brief"),
+      adminTotals([["Searched",searched.length],["Awaiting search",briefs.length-searched.length]])+
+      adminTable("Planner briefs",briefHeadings,briefRows(briefs),"No briefs in this period."))+
+    adminPanel("matches","Matches",matched.length+" of "+searched.length+" searched briefs",
+      '<p class="hint">A brief counts once when its shortlist contains at least one venue.</p>'+
+      adminTable("Briefs with matches",briefHeadings,briefRows(matched),"No matched briefs in this period."))+
+    adminPanel("bookings","Confirmed bookings",countLabel(bookings.length,"booking"),
+      adminTotals([["Agreed booking value",pounds(totalBookingValue)],["Simulated deposits",pounds(totalDeposits)]])+
+      adminTable("Confirmed bookings",["Reference","Venue","Event date","Agreed total","Deposit status"],
+        bookings.map(entry=>[entry.reference,entry.venueName,dateLabel(entry.event.date),pounds(entry.quote),pounds(entry.deposit)+" · simulated paid"]),
+        "No confirmed bookings in this period."))+
+    adminPanel("funnel","Booking funnel",confirms+" enquiry-to-booking rate",
+      adminTotals([["Briefs submitted",briefs.length],["Briefs with a match",matched.length],["Enquiries sent",enquiries.length],
+        ["Enquiries quoted",quoted.length],["Confirmed bookings",bookings.length]])+
+      '<p class="hint">Activity totals can include multiple enquiries from one brief. The conversion rate is the share of enquiries sent in this period that have since become bookings.</p>')+
+    adminPanel("attention","Needs attention",countLabel(drafts.length,"draft")+" · "+countLabel(awaiting.length,"enquiry","enquiries")+" awaiting reply",
+      '<h3>Draft listings</h3>'+adminTable("Draft listings",["Venue","Area","Next step"],
+        drafts.map(entry=>[entry.name,entry.area,entry.missing]),"All demo listings are published.")+
+      '<h3>Awaiting first venue reply</h3>'+adminTable("Enquiries awaiting a reply",["Enquiry","Venue","Sent","Waiting"],
+        awaiting.map(entry=>[entry.id,entry.venueName,activityDate(entry.requestedAt),entry.requestedAt?durationLabel(hoursSince(now,entry.requestedAt)):"—"]),
+        "No enquiries waiting for a first reply in this period.")+
+      '<h3>Briefs without a suitable venue</h3>'+adminTable("Briefs without matches",briefHeadings,briefRows(noMatches),
+        "Every searched brief in this period had a match."))+
+    adminPanel("pilot","Pilot measures",live+" published listings",
+      adminTotals([["Published listings",live],["Median first reply",durationLabel(median)],["Enquiry-to-booking rate",confirms]])+
+      '<p class="hint">Listing status reflects the current inventory. Reply time uses enquiries sent in the selected period that have a recorded reply.</p>'+
+      adminTable("Venue listing status",["Venue","Area","Status"],listings.map(entry=>[entry.name,entry.area,entry.published?"Published":"Draft"]),
+        "No listings available."))+
+    '</div>';
+}
+const views={home,signup:()=>authScreen("signup"),signin:()=>authScreen("signin"),brief:plannerBrief,review,shortlist,enquire,request:requestView,checkout,listing:ownerListing,listingEdit:ownerListingEdit,inbox:ownerInbox,calendar:ownerCalendar,calendarDetail,history:historyView,historyDetail:bookingDetail,quotes:quoteHistory,quoteDetail,admin};
+function render(moveFocus=true){
+  const plannerNav=state.role==="planner" && state.signedIn.planner && !["home","signup","signin"].includes(state.page)
+    ? plannerControls() : "";
+  byId("app").innerHTML=plannerNav+views[state.page]();
+  byId("notice").textContent=notice;
+  saveDemoState();
+  const authenticated=Boolean(state.signedIn[state.role]) && state.page!=="signin" && state.page!=="signup";
+  const label=byId("account-label");
+  label.hidden=!authenticated;
+  label.textContent=authenticated?accountLabels[state.role]:"";
+  byId("nav-signin").hidden=authenticated;
+  byId("nav-signup").hidden=authenticated;
+  byId("nav-signout").hidden=!authenticated;
+  Object.keys(accountLabels).forEach(role=>{
+    const shortcut=byId("demo-"+role);
+    if(authenticated && state.role===role) shortcut.setAttribute("aria-current","page");
+    else shortcut.removeAttribute("aria-current");
+  });
+  if(moveFocus) byId("app").querySelector("h1")?.focus();
+}
+function checkRequestDate(r){
+  if(available(venue(r.venueId),r.event.date)) return true;
+  r.status="unavailable";
+  r.message="The date has become unavailable. Return to your shortlist to choose another venue.";
+  return false;
+}
+function refreshDemo(){
+  if (window.top !== window || window.location.protocol === "file:") {
+    window.location.reload();
+    return;
+  }
+  const latest = new URL(window.location.href);
+  latest.searchParams.set("refresh", Date.now().toString());
+  window.location.replace(latest.href);
+}
+
+document.addEventListener("click", event=>{
+  const avHelp=event.target.closest(".av-help");
+  if(avHelp && event.target.closest("button")){
+    const open=avHelp.toggleAttribute("data-open");
+    avHelp.toggleAttribute("data-dismissed",!open);
+    return;
+  }
+  document.querySelectorAll(".av-help[data-open]").forEach(help=>help.removeAttribute("data-open"));
+  const submitter = event.target.closest("button[data-submit]");
+  if (submitter) {
+    submitDemoForm(submitter.form, submitter);
+    return;
+  }
+  const target=event.target.closest('button[data-action], .listing-grid [data-action="edit-listing"]');
+  if(!target) return;
+  notice="";
+  const a=target.dataset.action;
+  if(a==="refresh"){refreshDemo();return;}
+  if(a==="reset"){
+    state=initialState();
+    byId("demo-controls").open=false;
+    notice="Demo reset.";
+  }
+  if(a==="home") go(state.signedIn[state.role]?state.role:"home","home");
+  if(a==="account-home") openAccount(state.role);
+  if(a==="preview-role"){
+    previewRole(target.dataset.id);
+    byId("demo-controls").open=false;
+  }
+  if(a==="signin" || a==="signup"){
+    const role=byId("auth-role")?.value || (state.role==="venue"?"venue":"planner");
+    go(a==="signup" && role==="admin"?"planner":role,a);
+  }
+  if(a==="signout"){
+    state.signedIn[state.role]=false;
+    notice="Signed out of the demo.";
+    go("home","home");
+  }
+  if(a==="demo-details"){
+    const role=byId("auth-role").value;
+    const name=byId("auth-name");
+    const email=byId("auth-email");
+    const profile=state.accounts[role] || demoProfiles[role];
+    if(name){
+      name.value=profile.name;
+      name.setCustomValidity("");
+    }
+    email.value=profile.email;
+    email.setCustomValidity("");
+    email.focus();
+    return;
+  }
+  if(a==="owner-listing" || a==="owner-inbox" || a==="owner-calendar"){
+    if(a==="owner-calendar" && ownedVenue(target.dataset.id)) state.calendarVenueId=target.dataset.id;
+    go("venue",{"owner-listing":"listing","owner-inbox":"inbox","owner-calendar":"calendar"}[a]);
+  }
+  if(a==="edit-listing" && ownedVenue(target.dataset.id)){
+    state.ownerListingId=target.dataset.id;
+    go("venue","listingEdit");
+  }
+  if(a==="calendar-prev" || a==="calendar-next"){
+    const [year,month] = state.calendarMonth.split("-").map(Number);
+    const offset = a==="calendar-prev" ? -1 : 1;
+    state.calendarMonth = new Date(Date.UTC(year,month-1+offset,1)).toISOString().slice(0,7);
+    render(false);
+    document.querySelector('button[data-action="'+a+'"]').focus();
+    return;
+  }
+  if(a==="calendar-event"){
+    const entry=calendarEntries().find(item=>item.id===target.dataset.id);
+    if(entry?.status==="confirmed"){
+      state.historySelection.venue={id:entry.id,fromCalendar:true};
+      go("venue","historyDetail");
+    }else{
+      const enquiry=visibleRequests("venue").find(r=>r.id===target.dataset.id);
+      if(enquiry) showEnquiry(enquiry,"venue");
+      else {state.calendarEntryId=target.dataset.id;go("venue","calendarDetail");}
+    }
+  }
+  if(a==="planner-work"){
+    const r=activeRequest("planner");
+    if(r) showEnquiry(r,"planner");
+    else go("planner","brief");
+  }
+  if(a==="quote-history") go(state.role,"quotes");
+  if(a==="clear-quote-search"){state.quoteLookup[state.role]="";go(state.role,"quotes");}
+  if(a==="view-quote"){state.quoteRef[state.role]=target.dataset.id;go(state.role,"quoteDetail");}
+  if(a==="open-enquiry"){
+    const r=visibleRequests(state.role).find(r=>r.id===target.dataset.id);
+    if(r) showEnquiry(r,state.role);
+  }
+  if(a==="toggle-quote-removal"){
+    const record=quoteRecords(state.role).find(({q})=>q.reference===target.dataset.id);
+    if(record && canRemoveQuote(record.r,record.q)){
+      const q=record.q;
+      q.removed[state.role]=!q.removed[state.role];
+      notice=q.removed[state.role]?"Quote removed from your history.":"Quote restored to your history.";
+      go(state.role,"quotes");
+    }
+  }
+  if(a==="ask-quote") state.quoteMode="ask";
+  if(a==="decline-quote") state.quoteMode="decline";
+  if(a==="edit-quote") state.quoteMode="edit";
+  if(a==="cancel-quote") state.quoteMode="";
+  if(a==="booking-history") go(state.role,"history");
+  if(a==="booking-detail"){
+    state.historySelection[state.role]={id:target.dataset.id,fromCalendar:false};
+    go(state.role,"historyDetail");
+  }
+  if(a==="new-brief"){
+    state.request=null;
+    state.raw="";
+    state.currentBriefId="";
+    go("planner","brief");
+  }
+  if(a==="example"){
+    byId("brief").value=demoBrief;
+    byId("brief").focus();
+    return;
+  }
+  if(a==="example-date"){
+    byId("date").value=demoDate;
+    byId("date").focus();
+    return;
+  }
+  if(a==="edit-brief") go("planner","brief");
+  if(a==="edit-details") go("planner","review");
+  if(a==="shortlist"){
+    const r=state.page==="request" && activeRequest("planner");
+    if(r){state.event={...r.event};state.raw=r.brief;}
+    go("planner","shortlist");
+  }
+  if(a==="select"){state.selected=target.dataset.id;go("planner","enquire");}
+  if(a==="send"){
+    if(fits(venue(state.selected),state.event)){
+      const item=venue(state.selected);
+      const checked=new Set(Array.from(byId("app").querySelectorAll('[name="requested-extra"]:checked'),el=>el.value));
+      const requestedExtras=pricedAmenities(item).filter(extra=>checked.has(extra.id));
+      const r={id:String(state.requests.length+1).padStart(3,"0"),venueId:state.selected,event:{...state.event},brief:state.raw,
+        plannerEmail:state.accounts.planner.email,booker:state.accounts.planner.name,status:"pending",message:"",plannerReply:"",
+        requestedAt:Date.now(),firstReplyAt:null,
+        requestedExtras,versions:[],conversation:[]};
+      state.requests.push(r);
+      showEnquiry(r,"planner");
+      state.calendarVenueId=state.selected;
+      state.calendarMonth=state.event.date.slice(0,7);
+      go("planner","request");
+    }else{
+      notice="That venue is unavailable for this brief. Choose another result.";
+      go("planner","shortlist");
+    }
+  }
+  if(a==="add-service" || a==="add-listed-extra" || a==="remove-service"){
+    const form=target.form;
+    const list=byId("quote-services");
+    if(a!=="remove-service"){
+      const item=ownedVenue(activeRequest("venue").venueId);
+      const extra=a==="add-listed-extra" && pricedAmenities(item).find(entry=>entry.id===byId("listed-extra").value);
+      if(a==="add-listed-extra" && !extra){byId("listed-extra").focus();return;}
+      if(extra && Array.from(list.querySelectorAll('[name="service-name"]')).some(field=>field.value.trim()===extra.name)){
+        byId("notice").textContent="That amenity is already on the quote.";
+        return;
+      }
+      list.insertAdjacentHTML("beforeend",optionalServiceFields(extra||{}));
+      list.lastElementChild.querySelector("input").focus();
+    }else{
+      target.closest(".quote-service").remove();
+      form.querySelector('[data-action="add-service"]').focus();
+    }
+    byId("deposit").setCustomValidity("");
+    updateQuoteTotal(form);
+    return;
+  }
+  if(a==="back-to-quote") go("planner","request");
+  const payable=state.role==="planner" && activeRequest("planner");
+  if(a==="checkout" && quoteIsOpen(payable)){
+    state.quoteMode="";
+    go("planner",checkRequestDate(payable)?"checkout":"request");
+  }
+  if(a==="pay" && quoteIsOpen(payable)){
+    const q=quoteOf(payable);
+    if(target.dataset.id!==q.reference){go("planner","request");render();return;}
+    if(byId("test-card").value==="decline"){
+      const error=byId("payment-error");
+      error.textContent="Test card declined. Choose Visa ending in 4242 and try again.";
+      error.hidden=false;
+      byId("test-card").focus();
+      return;
+    }
+    if(checkRequestDate(payable)){
+      const number=String(state.bookings.length+1).padStart(3,"0");
+      Object.assign(payable,{status:"confirmed",reference:"GTH-"+number,bookedQuoteRef:q.reference,
+        hire:q.hire,services:q.services,quote:q.quote,deposit:q.deposit});
+      state.bookings.push({...payable,id:"booking-"+number,venueName:venue(payable.venueId).name,confirmedAt:Date.now()});
+      for(const other of visibleRequests("planner")){
+        if(other!==payable && other.venueId===payable.venueId && other.event.date===payable.event.date && other.status!=="confirmed"){
+          other.status="alternative";
+          other.message="Another quote was booked for this venue and date.";
+        }
+      }
+    }
+    go("planner","request");
+  }
+  if(a==="toggle-date"){
+    const item=ownedVenue(state.ownerListingId);
+    if(!item) return;
+    const confirmed=booked(item.id,demoDate);
+    if(confirmed) notice="This date has a confirmed booking.";
+    else if(item.blocked.includes(demoDate)) item.blocked=item.blocked.filter(day=>day!==demoDate);
+    else item.blocked.push(demoDate);
+  }
+  render();
+});
+function submitDemoForm(form, submitter){
+  if(!form) return;
+  if(form.dataset.form==="listing"){
+    const invalid=form.querySelector("#owner-facilities :invalid");
+    if(invalid) byId("owner-facilities").open=true;
+  }
+  if(!submitter?.hasAttribute("data-skip-validation") && !form.reportValidity()) return;
+  notice="";
+  const data=new FormData(form);
+  switch(form.dataset.form){
+    case "signup":
+    case "signin":{
+      const role=String(data.get("role"));
+      const email=String(data.get("email")).trim().toLowerCase();
+      const creating=form.dataset.form==="signup";
+      if(!Object.hasOwn(demoProfiles,role) || (creating && role==="admin")) return;
+      const profile=state.accounts[role];
+      const emailField=byId("auth-email");
+      if(creating && profile){
+        emailField.setCustomValidity("A demo account already exists for this role. Sign in to use it.");
+        emailField.reportValidity();
+        return;
+      }
+      if(creating){
+        const name=String(data.get("name")).trim();
+        if(!name){
+          const nameField=byId("auth-name");
+          nameField.setCustomValidity("Enter a fictional name for your demo account.");
+          nameField.reportValidity();
+          return;
+        }
+        state.accounts[role]={name,email};
+        state.adminSignUps.push({role,at:Date.now()});
+      }else{
+        const existing=profile || demoProfiles[role];
+        if(email!==existing.email){
+          emailField.setCustomValidity("This email doesn’t match the demo account. Try Use demo details.");
+          emailField.reportValidity();
+          return;
+        }
+        state.accounts[role]=existing;
+      }
+      state.signedIn[role]=true;
+      openAccount(role);
+      break;
+    }
+    case "brief":{
+      state.raw=String(data.get("brief")).trim();
+      const lower=state.raw.toLowerCase();
+      const guests=lower.match(/\b(\d{1,4})\s+(?:people|guests|standing|seated)\b/);
+      const budget=lower.match(/£\s*([\d,]+)\s*(k)?/);
+      const date=lower.match(/\b\d{4}-\d{2}-\d{2}\b/);
+      const hasStanding=/\bstanding\b/.test(lower);
+      const hasSeating=/\b(?:seated|seating|sitting)\b/.test(lower);
+      const mixed=/\bmixed(?: layout| seating)?\b/.test(lower) || (hasStanding && hasSeating);
+      state.event={date:date?.[0]||"",type:eventTypes.find(([, , pattern]) => pattern.test(lower))?.[0] || "",guests:guests?Number(guests[1]):"",
+        layout:mixed?"mixed":hasSeating?"seated":"standing",area:lower.includes("shoreditch")?"Shoreditch":"",
+        budget:budget?Number(budget[1].replaceAll(",",""))*(budget[2]?1000:1):6000,
+        facilities:/\b(?:with|needs?|requires?)\s+(?:av|audio[ -]?visual)\b/.test(lower)?{av:"essential"}:{}};
+      state.currentBriefId=String(state.adminBriefs.length+1);
+      state.adminBriefs.push({id:state.currentBriefId,at:Date.now(),type:state.event.type,area:state.event.area,matches:null});
+      go("planner","review");
+      break;
+    }
+    case "review":
+      state.event={date:String(data.get("date")),type:String(data.get("eventType")),guests:Number(data.get("guests")),layout:String(data.get("layout")),
+        area:String(data.get("area")).trim(),budget:Number(data.get("budget")),
+        facilities:Object.fromEntries(facilities.map(([id])=>[id,String(data.get("want-"+id)||"")]))};
+      state.shortlistSort="match";
+      const brief=state.adminBriefs.find(entry=>entry.id===state.currentBriefId);
+      if(brief) Object.assign(brief,{searchedAt:Date.now(),type:state.event.type,area:state.event.area,matches:matches().length});
+      go("planner","shortlist");
+      break;
+    case "listing":{
+      const item=ownedVenue(state.ownerListingId);
+      if(!item) return;
+      const details={};
+      for(const field of ["name","area","kind"]){
+        const value=String(data.get(field)).trim();
+        if(!value){
+          const input=form.elements.namedItem(field);
+          input.setCustomValidity("Enter "+input.labels[0].textContent.toLowerCase()+".");
+          input.reportValidity();
+          return;
+        }
+        details[field]=value;
+      }
+      const toilets=Object.fromEntries(toiletFields.map(([id])=>{
+        const value=data.get("cubicles-"+id);
+        return [id,value===""?null:Number(value)];
+      }));
+      const counts=toiletTypes.map(([id])=>toilets[id]);
+      if(counts.every(count=>count!==null) && toilets.accessible!==null &&
+        toilets.accessible>counts.reduce((total,count)=>total+count,0)){
+        const input=byId("cubicles-accessible");
+        byId("owner-facilities").open=true;
+        input.setCustomValidity("Accessible cubicles cannot exceed the total number of cubicles.");
+        input.reportValidity();
+        return;
+      }
+      const venueFacilities=Object.fromEntries(facilities.filter(([id])=>data.has("offer-"+id))
+        .map(([id])=>[id,String(data.get("offer-"+id))]));
+      const amenityPrices=Object.fromEntries(Object.entries(venueFacilities)
+        .filter(([id,status])=>status==="yes" && Number(data.get("charge-"+id))>0)
+        .map(([id])=>[id,Number(data.get("charge-"+id))]));
+      Object.assign(item,{...details,standing:Number(data.get("standing")),seated:Number(data.get("seated")),
+        mixed:data.get("mixed")?Number(data.get("mixed")):null,price:Number(data.get("price")),model:String(data.get("model")),
+        facilities:venueFacilities,amenityPrices,toilets,accessNotes:String(data.get("access-notes")).trim(),
+        equipmentNotes:String(data.get("equipment-notes")).trim(),published:data.has("published")});
+      notice=item.published
+        ? "Listing saved. It can appear in planner searches."
+        : "Listing saved. It is hidden from planner searches.";
+      break;
+    }
+    case "venue-response":{
+      const r=activeRequest("venue");
+      if(!r || !["pending","accepted","quote-question","planner-declined"].includes(r.status)) return;
+      const decision=submitter?.value;
+      const message=String(data.get("message")||"").trim();
+      if(decision==="question"){
+        if(!message){byId("message").setCustomValidity("Enter your question for the planner.");byId("message").reportValidity();return;}
+        r.firstReplyAt ??= Date.now();
+        r.message=message;r.status="question";
+      }else if(decision==="decline"){
+        r.firstReplyAt ??= Date.now();
+        r.message=message || "The venue cannot take this booking.";r.status="declined";
+      }else if(decision==="accept"){
+        const services=readOptionalServices(form);
+        if(!services) return;
+        const hire=Number(data.get("hire")),deposit=Number(data.get("deposit"));
+        const quote=(pence(hire)+services.reduce((total,service) => total+pence(service.amount),0))/100;
+        if(pence(deposit)>pence(quote)){byId("deposit").setCustomValidity("The deposit must be no more than the total quote.");byId("deposit").reportValidity();return;}
+        if(checkRequestDate(r)){
+          const revision=r.versions.length+1;
+          const reference="GQ-"+r.id+"-"+String(revision).padStart(2,"0");
+          r.firstReplyAt ??= Date.now();
+          r.versions.push({reference,revision,hire,services,quote,deposit,note:message,removed:{planner:false,venue:false}});
+          state.request=r;
+          r.status="accepted";
+          notice=revision===1?"Quote sent to the planner.":"Revised quote sent to the planner.";
+        }
+        state.quoteMode="";
+        break;
+      }
+      notice="Venue response recorded in the demo.";
+      break;
+    }
+    case "reply":{
+      const r=activeRequest("planner");
+      if(r?.status!=="question") return;
+      r.plannerReply=String(data.get("reply")).trim();
+      r.status="pending";
+      notice="Reply sent in the demo.";
+      break;
+    }
+    case "quote-search":
+      state.quoteLookup[state.role]=String(data.get("query")).trim();
+      break;
+    case "quote-question":
+    case "quote-decline":
+    case "quote-answer":{
+      const owner=form.dataset.form==="quote-answer";
+      const r=activeRequest(state.role);
+      if(!quoteIsOpen(r) || (owner && r.status!=="quote-question")) return;
+      const decline=form.dataset.form==="quote-decline";
+      const message=String(data.get("message")??"").trim();
+      if(!decline && !message) return;
+      r.conversation.push({from:owner?"Venue owner":"Planner",reference:quoteOf(r).reference,
+        message:decline?"Declined the quote."+(message?" "+message:""):message});
+      r.status=owner?"accepted":decline?"planner-declined":"quote-question";
+      state.quoteMode="";
+      notice=owner?"Reply sent to the planner.":decline?"Quote declined.":"Question sent to the venue.";
+      break;
+    }
+  }
+  render();
+}
+
+// Handle Enter in fields without relying on a native form submission.
+document.addEventListener("keydown", event => {
+  if(event.key==="Escape"){
+    document.querySelectorAll(".av-help").forEach(help=>{
+      help.removeAttribute("data-open");
+      if(help.matches(":hover,:focus-within")) help.setAttribute("data-dismissed","");
+    });
+  }
+  if (event.key !== "Enter" || event.isComposing || event.target.tagName !== "INPUT" ||
+      !event.target.matches('input:not([type="checkbox"]):not([type="date"])')) return;
+  const submitter = event.target.form?.querySelector("button[data-submit]");
+  if (submitter) {
+    event.preventDefault();
+    submitDemoForm(submitter.form, submitter);
+  }
+});
+document.addEventListener("submit", event => {
+  const form=event.target;
+  if(!form.dataset.form) return;
+  event.preventDefault();
+  if(["signin","signup","quote-search"].includes(form.dataset.form)) submitDemoForm(form,event.submitter);
+});
+document.addEventListener("focusin",event=>{
+  event.target.closest(".av-help")?.removeAttribute("data-dismissed");
+});
+document.addEventListener("pointerout",event=>{
+  const help=event.target.closest(".av-help");
+  if(help && !help.contains(event.relatedTarget) && !help.matches(":focus-within")) help.removeAttribute("data-dismissed");
+});
+document.addEventListener("change", event => {
+  if(event.target.id==="auth-role"){
+    const email=byId("auth-email");
+    email.setCustomValidity("");
+    email.value="";
+    return;
+  }
+  const {id,value}=event.target;
+  if(id==="show-removed"){
+    state.showRemoved[state.role]=event.target.checked;
+    render(false);
+    byId(id).focus();
+    return;
+  }
+  if(id.startsWith("offer-")){
+    const key=id.slice(6), price=byId("amenity-price-"+key);
+    if(price){price.hidden=value!=="yes";byId("charge-"+key).disabled=value!=="yes";}
+    return;
+  }
+  if(id.startsWith("want-")){
+    const selected=group=>Array.from(group.querySelectorAll("[name^='want-']")).filter(field=>field.value).length;
+    byId("facilities-count").textContent=selected(event.target.form)+" selected";
+    const group=event.target.closest(".facility-group");
+    const count=selected(group);
+    group.querySelector("summary small").textContent=count?count+" selected":"";
+    return;
+  }
+  if(id==="admin-period"){
+    state.adminOpen=Array.from(document.querySelectorAll(".admin-panel[open]"),details=>details.dataset.panel);
+    state.adminPeriod=value;
+  }
+  else if(id==="shortlist-sort") state.shortlistSort=value;
+  else if(id==="history-sort") state.historySort[state.role]=value;
+  else if(id==="history-venue") state.historyVenue=value;
+  else if(id==="calendar-venue") state.calendarVenueId=value;
+  else return;
+  render(false);
+  byId(id).focus();
+});
+document.addEventListener("input",event=>{
+  const field=event.target;
+  field.setCustomValidity?.("");
+  if(field.id.startsWith("cubicles-")) byId("cubicles-accessible").setCustomValidity("");
+  if(field.form?.dataset.form!=="venue-response") return;
+  if(field.matches('[name="hire"],[name="service-cost"]')){
+    byId("deposit").setCustomValidity("");
+    updateQuoteTotal(field.form);
+  }
+  if(field.closest(".quote-service")){
+    for(const input of field.closest(".quote-service").querySelectorAll("input")) input.setCustomValidity("");
+  }
+});
+render(false);
+</script>
+</body>
+</html>

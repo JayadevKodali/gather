@@ -1,0 +1,122 @@
+{
+  "_note": "DEVELOPMENT cases written and labelled by Claude while building the matcher. NOT the independent evaluation: Jay and GPT write and label those separately (eval/independent/). Labels were set from venue facts and the rubric in eval/README.md, not from matcher output.",
+  "today": "2026-11-14",
+  "cases": [
+    {
+      "id": "D01-amara-example",
+      "scenario": "Vague date (late March), strict cap, essential AV",
+      "text": "80 people, standing, Shoreditch-ish, late March, under 6k, needs AV",
+      "followUps": [{ "field": "date", "answer": "26 March 2027" }],
+      "gold": { "date": "2027-03-26", "guests": 80, "layout": "standing", "boroughs": ["Hackney"], "budget": { "mode": "strict", "amountPence": 600000, "basis": "total" }, "eventType": null, "facilities": { "av": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D02-missing-guests",
+      "scenario": "Guest count missing; lunch implied",
+      "text": "Team offsite in Southwark on 14 May 2027, seated, we need a projector and lunch provided",
+      "followUps": [{ "field": "guests", "answer": "45" }],
+      "gold": { "date": "2027-05-14", "guests": 45, "layout": "seated", "boroughs": ["Southwark"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": "corporate", "facilities": { "projector": "essential", "catering": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D03-two-budgets",
+      "scenario": "Contradictory budget (under £2k vs stretch to £6k)",
+      "text": "Client dinner for 40 seated near Liverpool Street on 9 March 2027. Budget under £2,000 but we can stretch to 6k. Need wifi.",
+      "followUps": [{ "field": "budget", "answer": "£6,000 is the hard cap" }],
+      "gold": { "date": "2027-03-09", "guests": 40, "layout": "seated", "boroughs": ["City of London"], "budget": { "mode": "strict", "amountPence": 600000, "basis": "total" }, "eventType": "corporate", "facilities": { "wifi": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D04-exact-capacity",
+      "scenario": "Exactly at a venue's seated capacity (70 of 70)",
+      "text": "Seated screening and talk for exactly 70 guests in King's Cross on 18 February 2027, need a projector",
+      "followUps": [],
+      "gold": { "date": "2027-02-18", "guests": 70, "layout": "seated", "boroughs": ["Camden"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": null, "facilities": { "projector": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D05-no-availability",
+      "scenario": "True no-match: 350 standing on a Saturday when every big room is taken or closed",
+      "text": "Launch party for 350 standing in east London on Saturday 17 April 2027, must have a dance floor",
+      "followUps": [],
+      "gold": { "date": "2027-04-17", "guests": 350, "layout": "standing", "boroughs": ["Hackney", "Tower Hamlets", "Newham"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": "corporate", "facilities": { "danceFloor": "essential" } },
+      "expectNoMatch": true
+    },
+    {
+      "id": "D06-vague-area",
+      "scenario": "Loose geography and a flexible budget",
+      "text": "Drinks reception for 60 somewhere easy from Liverpool Street on 11 March 2027, budget around £3k, flexible",
+      "followUps": [],
+      "gold": { "date": "2027-03-11", "guests": 60, "layout": "standing", "boroughs": ["City of London"], "budget": { "mode": "flexible", "amountPence": 300000, "basis": "total" }, "eventType": null, "facilities": {} },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D07-per-head-cap",
+      "scenario": "Per-head strict cap, south London, wedding",
+      "text": "Wedding reception for 100 guests, seated dinner then dancing, max £60 a head, south London, Saturday 12 June 2027",
+      "followUps": [],
+      "gold": { "date": "2027-06-12", "guests": 100, "layout": "seated", "boroughs": ["Southwark", "Lambeth", "Lewisham"], "budget": { "mode": "strict", "amountPence": 6000, "basis": "per_head" }, "eventType": "wedding", "facilities": { "danceFloor": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D08-step-free",
+      "scenario": "Accessibility essentials",
+      "text": "Charity lunch for 50 seated in Islington on 2 March 2027. It must be step-free with an accessible toilet. Around £2,500.",
+      "followUps": [],
+      "gold": { "date": "2027-03-02", "guests": 50, "layout": "seated", "boroughs": ["Islington"], "budget": { "mode": "flexible", "amountPence": 250000, "basis": "total" }, "eventType": null, "facilities": { "stepFree": "essential", "accessibleToilet": "essential" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D09-range-and-mixed",
+      "scenario": "Guest range, mixed layout, per-head guide, preferred facility",
+      "text": "Drinks then dinner for 100-150 people in Bermondsey on 21 May 2027, around £45 a head, ideally a dance floor",
+      "followUps": [],
+      "gold": { "date": "2027-05-21", "guests": 150, "layout": "mixed", "boroughs": ["Southwark"], "budget": { "mode": "flexible", "amountPence": 4500, "basis": "per_head" }, "eventType": null, "facilities": { "danceFloor": "preferred" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D10-almost-empty",
+      "scenario": "Nearly empty brief: three follow-ups in order",
+      "text": "Need a venue for a party",
+      "followUps": [
+        { "field": "date", "answer": "14 May 2027" },
+        { "field": "guests", "answer": "30" },
+        { "field": "layout", "answer": "standing" }
+      ],
+      "gold": { "date": "2027-05-14", "guests": 30, "layout": "standing", "boroughs": [], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": "private", "facilities": {} },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D11-not-london",
+      "scenario": "Out-of-area brief corrected by the planner",
+      "text": "Birthday party in Manchester for 30 on 5 June 2027, standing",
+      "followUps": [{ "field": "area", "answer": "Sorry, it's actually in Clerkenwell" }],
+      "gold": { "date": "2027-06-05", "guests": 30, "layout": "standing", "boroughs": ["Islington"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": "birthday", "facilities": {} },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D12-priced-extra-under-cap",
+      "scenario": "A priced essential extra counts towards a strict cap",
+      "text": "Product launch, 150 standing, London Bridge, 22 April 2027, under £7,500, AV essential, microphones would be nice",
+      "followUps": [],
+      "gold": { "date": "2027-04-22", "guests": 150, "layout": "standing", "boroughs": ["Southwark"], "budget": { "mode": "strict", "amountPence": 750000, "basis": "total" }, "eventType": "corporate", "facilities": { "av": "essential", "microphones": "preferred" } },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D13-tiny-dinner",
+      "scenario": "Smallest capacity in the set (12 seated, exact)",
+      "text": "Intimate supper for 12 in Hackney on 19 March 2027, seated",
+      "followUps": [],
+      "gold": { "date": "2027-03-19", "guests": 12, "layout": "seated", "boroughs": ["Hackney"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": null, "facilities": {} },
+      "expectNoMatch": false
+    },
+    {
+      "id": "D14-town-hall",
+      "scenario": "Town hall needing specific AV, not general AV",
+      "text": "All-hands town hall for 110 seated near King's Cross on Thursday 4 March 2027. Needs video conferencing and microphones.",
+      "followUps": [],
+      "gold": { "date": "2027-03-04", "guests": 110, "layout": "seated", "boroughs": ["Camden"], "budget": { "mode": "none", "amountPence": null, "basis": "total" }, "eventType": "town_hall", "facilities": { "videoConferencing": "essential", "microphones": "essential" } },
+      "expectNoMatch": false
+    }
+  ]
+}

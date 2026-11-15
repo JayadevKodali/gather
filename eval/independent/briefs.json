@@ -1,0 +1,337 @@
+{
+  "today": "2026-11-14",
+  "cases": [
+    {
+      "id": "I01-two-dates",
+      "scenario": "Two plausible dates; dance floor and sound both essential",
+      "text": "My sister has put 12 February 2027 in the group chat but the DJ has 13 February 2027. We haven’t agreed which date to ask for. About 210 guests standing for her birthday in Brixton. Hard cap £4,700 total. A dance floor and an actual sound system are both essential.",
+      "followUps": [
+        {
+          "field": "date",
+          "answer": "13 February 2027"
+        }
+      ],
+      "gold": {
+        "date": "2027-02-13",
+        "guests": 210,
+        "layout": "standing",
+        "boroughs": [
+          "Lambeth"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 470000,
+          "basis": "total"
+        },
+        "eventType": "birthday",
+        "facilities": {
+          "danceFloor": "essential",
+          "soundSystem": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I02-headcount-missing",
+      "scenario": "Small private dinner; headcount deliberately omitted",
+      "text": "Looking for a private seated dinner in Chelsea on 14 May 2027. The RSVP sheet is with my colleague, so I don’t have the total yet. The venue needs to offer catering and bar service. We can’t go above £2,700 total.",
+      "followUps": [
+        {
+          "field": "guests",
+          "answer": "27 guests"
+        }
+      ],
+      "gold": {
+        "date": "2027-05-14",
+        "guests": 27,
+        "layout": "seated",
+        "boroughs": [
+          "Kensington and Chelsea"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 270000,
+          "basis": "total"
+        },
+        "eventType": "private",
+        "facilities": {
+          "catering": "essential",
+          "bar": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I03-layout-missing",
+      "scenario": "Exact seated capacity; layout must be confirmed",
+      "text": "Town hall for 70 people in Camden, 18 February 2027. Still need the team to agree whether guests sit or stand, so please check with me. £2,300 hard cap for the whole event. Must have a projector and screen, microphones and video conferencing.",
+      "followUps": [
+        {
+          "field": "layout",
+          "answer": "Seated"
+        }
+      ],
+      "gold": {
+        "date": "2027-02-18",
+        "guests": 70,
+        "layout": "seated",
+        "boroughs": [
+          "Camden"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 230000,
+          "basis": "total"
+        },
+        "eventType": "town_hall",
+        "facilities": {
+          "projector": "essential",
+          "microphones": "essential",
+          "videoConferencing": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I04-budget-conflict",
+      "scenario": "Conflicting hard caps; step-free entry and storage",
+      "text": "Company showcase for 90 in a mixed standing and seated layout in Hackney on 20 May 2027. Finance wrote “£4,000 hard cap” and the organiser wrote “£5,500 hard cap”. Please ask which to use. Step-free access and space to store our display crates are both essential.",
+      "followUps": [
+        {
+          "field": "budget",
+          "answer": "£4,000 total is the hard cap"
+        }
+      ],
+      "gold": {
+        "date": "2027-05-20",
+        "guests": 90,
+        "layout": "mixed",
+        "boroughs": [
+          "Hackney"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 400000,
+          "basis": "total"
+        },
+        "eventType": "corporate",
+        "facilities": {
+          "stepFree": "essential",
+          "storage": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I05-vague-wedding-date",
+      "scenario": "Vague wedding date; 130 seated excludes 120-seat rooms",
+      "text": "We’re doing the wedding in early June 2027, somewhere around Waterloo. 130 guests seated for dinner. The dance floor and staging are essential, and £6,000 is our absolute total limit. We haven’t given you the exact date yet.",
+      "followUps": [
+        {
+          "field": "date",
+          "answer": "5 June 2027"
+        }
+      ],
+      "gold": {
+        "date": "2027-06-05",
+        "guests": 130,
+        "layout": "seated",
+        "boroughs": [
+          "Lambeth"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 600000,
+          "basis": "total"
+        },
+        "eventType": "wedding",
+        "facilities": {
+          "danceFloor": "essential",
+          "staging": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I06-extras-at-cap",
+      "scenario": "Minimum spend plus two required priced extras exactly reaches the cap",
+      "text": "45 guests, mixed seated and standing, for a private celebration near Clerkenwell on 4 March 2027. The projector and screen and microphones are essential. Wi-Fi would be nice. £2,680 total is the maximum, including the essential extras.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-03-04",
+        "guests": 45,
+        "layout": "mixed",
+        "boroughs": [
+          "Islington"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 268000,
+          "basis": "total"
+        },
+        "eventType": "private",
+        "facilities": {
+          "projector": "essential",
+          "microphones": "essential",
+          "wifi": "preferred"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I07-per-person-ceiling",
+      "scenario": "Per-person cap applied to a hire-fee venue with a priced essential",
+      "text": "A seated wedding for 180 near Deptford on 21 May 2027. Our ceiling is £32 per head for the venue and the required equipment together. We must have a projector and screen and loading access for the suppliers.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-05-21",
+        "guests": 180,
+        "layout": "seated",
+        "boroughs": [
+          "Lewisham"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 3200,
+          "basis": "per_head"
+        },
+        "eventType": "wedding",
+        "facilities": {
+          "projector": "essential",
+          "loading": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I08-range-flexible-guide",
+      "scenario": "Guest range, mixed layout and an explicitly flexible guide",
+      "text": "Client event, 100–110 people, mixed seated and standing, around Wapping on 10 February 2027. Budget is roughly £5,200 total, flexible for the right room. We need step-free access and video conferencing. Catering would be nice, but we can arrange it ourselves.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-02-10",
+        "guests": 110,
+        "layout": "mixed",
+        "boroughs": [
+          "Tower Hamlets"
+        ],
+        "budget": {
+          "mode": "flexible",
+          "amountPence": 520000,
+          "basis": "total"
+        },
+        "eventType": "corporate",
+        "facilities": {
+          "stepFree": "essential",
+          "videoConferencing": "essential",
+          "catering": "preferred"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I09-access-and-negation",
+      "scenario": "Several access essentials and an explicitly unneeded projector",
+      "text": "Private reception for 72 standing on 15 April 2027 near Brixton. Step-free access to the room, a wheelchair-accessible toilet and baby changing are all essential. Parking would be useful. We do not need a projector. £6,500 maximum in total.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-04-15",
+        "guests": 72,
+        "layout": "standing",
+        "boroughs": [
+          "Lambeth"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 650000,
+          "basis": "total"
+        },
+        "eventType": "private",
+        "facilities": {
+          "stepFree": "essential",
+          "accessibleToilet": "essential",
+          "babyChanging": "essential",
+          "parking": "preferred"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I10-no-budget-draft",
+      "scenario": "No budget given; a plausible draft listing must stay hidden",
+      "text": "Company demo event for 38 people standing in Hackney on 23 April 2027. Loading access and Wi-Fi are essential so we can bring equipment and get online. No budget has been agreed, so leave that open.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-04-23",
+        "guests": 38,
+        "layout": "standing",
+        "boroughs": [
+          "Hackney"
+        ],
+        "budget": {
+          "mode": "none",
+          "amountPence": null,
+          "basis": "total"
+        },
+        "eventType": "corporate",
+        "facilities": {
+          "loading": "essential",
+          "wifi": "essential"
+        }
+      },
+      "expectNoMatch": false
+    },
+    {
+      "id": "I11-unpriced-must-have",
+      "scenario": "No match: an essential extra has no confirmed price under a strict cap",
+      "text": "65 seated for a private party near Bethnal Green on 6 March 2027. £4,500 is a hard total ceiling. We definitely need microphones, a dance floor, and the venue to do the setup. The budget must cover all of that.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-03-06",
+        "guests": 65,
+        "layout": "seated",
+        "boroughs": [
+          "Tower Hamlets"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 450000,
+          "basis": "total"
+        },
+        "eventType": "private",
+        "facilities": {
+          "microphones": "essential",
+          "danceFloor": "essential",
+          "setup": "essential"
+        }
+      },
+      "expectNoMatch": true
+    },
+    {
+      "id": "I12-unconfirmed-date",
+      "scenario": "No match: the affordable hall has no confirmed availability",
+      "text": "Birthday for 145 guests seated around Walthamstow on 27 March 2027. £2,000 maximum total. Step-free access, a wheelchair-accessible toilet and baby changing are essential. We need the venue to have confirmed that day is open.",
+      "followUps": [],
+      "gold": {
+        "date": "2027-03-27",
+        "guests": 145,
+        "layout": "seated",
+        "boroughs": [
+          "Waltham Forest"
+        ],
+        "budget": {
+          "mode": "strict",
+          "amountPence": 200000,
+          "basis": "total"
+        },
+        "eventType": "birthday",
+        "facilities": {
+          "stepFree": "essential",
+          "accessibleToilet": "essential",
+          "babyChanging": "essential"
+        }
+      },
+      "expectNoMatch": true
+    }
+  ]
+}
