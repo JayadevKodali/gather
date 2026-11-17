@@ -51,30 +51,6 @@ paid ─▶ fulfilCheckout()  (demo page action, or Stripe webhook)
    → checkout paid, quote paid, enquiry booked → emails to both sides
 ```
 
-## Practice changes for the live technical interview
-
-Each is small. Find the file, make the change, run `npm test`.
-
-1. **Make a strict budget a little flexible (allow 5% over).** In `lib/matching/eligibility.ts`, change
-   `total > cap` to `total > cap * 1.05`. Then update the "strict cap excludes" test in `tests/matching.test.ts`.
-2. **Change how much area matters.** In `lib/matching/score.ts`, edit `WEIGHTS` and the `areaPoints`
-   numbers (35 for the same borough, 18 for next door). Re-run `npm run eval` to see the effect.
-3. **Ask for the event type when it's missing.** In `lib/brief/followup.ts`, add a branch to
-   `nextQuestion` after layout. Then add the matching case in `applyAnswer`.
-4. **Treat "unknown" layout as seated instead of asking.** In `lib/brief/followup.ts`, remove the
-   layout question. In `lib/services/briefs.ts` `createBrief`, default `fields.layout ??= "seated"`.
-5. **Let owners set a minimum deposit percentage.** In `lib/services/enquiries.ts`, add a rule in
-   `QuoteInputSchema.superRefine`, e.g. `depositPence >= total * 0.1`.
-6. **Stop admins seeing something.** Every admin query is in `lib/services/admin.ts`. Delete a field
-   there and the page stops showing it.
-7. **Add a role check.** Use `requireRole(actor, "owner")` (services) or `requirePageRole("owner")` (pages).
-8. **Change the wording of a set-up step, or what counts as "done".** `lib/listing-setup.ts` (`SETUP_STEPS`,
-   `setupProgress`), tested in `tests/listing-setup.test.ts`.
-9. **Change what the Stripe payment page says.** `stripeSessionParams` in `lib/adapters/payments.ts`. The test
-   `tests/stripe-session.test.ts` pins the amount and metadata.
-10. **Change a status pill's colour or wording.** `components/StatusPill.tsx` for tones; `enquiryStatusLabel` in
-    `lib/services/enquiries.ts` for wording.
-
 ## Design pass: where the new pieces live
 
 | What | File |
